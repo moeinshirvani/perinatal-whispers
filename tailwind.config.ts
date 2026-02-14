@@ -51,19 +51,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sage: {
-          DEFAULT: "hsl(var(--sage))",
-          deep: "hsl(var(--sage-deep))",
-        },
+        mint: "hsl(var(--mint))",
+        "green-primary": "hsl(var(--green-primary))",
+        "green-dark": "hsl(var(--green-dark))",
+        "purple-primary": "hsl(var(--purple-primary))",
+        "purple-deep": "hsl(var(--purple-deep))",
         cream: {
           DEFAULT: "hsl(var(--cream))",
           dark: "hsl(var(--cream-dark))",
         },
-        rose: {
-          soft: "hsl(var(--rose-soft))",
-          deep: "hsl(var(--rose-deep))",
-        },
-        warm: "hsl(var(--warm))",
         chat: {
           user: "hsl(var(--chat-user))",
           ai: "hsl(var(--chat-ai))",

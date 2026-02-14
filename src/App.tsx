@@ -6,8 +6,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Chat from "./pages/Chat";
 import Coaches from "./pages/Coaches";
+import CoachProfile from "./pages/CoachProfile";
+import CoachOnboarding from "./pages/CoachOnboarding";
+import CoachApply from "./pages/CoachApply";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
+import Team from "./pages/Team";
+import HowItWorks from "./pages/HowItWorks";
+import Profile from "./pages/Profile";
+import B2B from "./pages/B2B";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,8 +30,16 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/coaches" element={<Coaches />} />
+          <Route path="/coaches/:slug" element={<CoachProfile />} />
+          <Route path="/coach-onboarding" element={<CoachOnboarding />} />
+          <Route path="/coach-apply" element={<CoachApply />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/b2b" element={<B2B />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

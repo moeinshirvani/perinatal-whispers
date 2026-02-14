@@ -4,39 +4,50 @@ import { Link } from "react-router-dom";
 const Footer = () => (
   <footer className="border-t border-border bg-card">
     <div className="container px-4 md:px-8 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="md:col-span-1">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="col-span-2 md:col-span-1">
           <Link to="/" className="flex items-center gap-2 mb-3">
-            <Leaf className="h-5 w-5 text-primary" />
+            <Leaf className="h-5 w-5 text-secondary" />
             <span className="font-display text-lg font-semibold text-foreground">Mooie Geest</span>
           </Link>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            AI-powered emotional support for your pregnancy and postpartum journey.
+            Empowering every expectant mother in the Netherlands with accessible, personalized mental wellness support.
           </p>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3">Product</h4>
           <div className="flex flex-col gap-2">
-            <Link to="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Pricing</Link>
-            <Link to="/coaches" className="text-sm text-muted-foreground hover:text-primary transition-colors">Coaches</Link>
-            <Link to="/chat" className="text-sm text-muted-foreground hover:text-primary transition-colors">Chat</Link>
+            <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-accent transition-colors">How it Works</Link>
+            <Link to="/pricing" className="text-sm text-muted-foreground hover:text-accent transition-colors">Pricing</Link>
+            <Link to="/coaches" className="text-sm text-muted-foreground hover:text-accent transition-colors">Coaches</Link>
+            <Link to="/chat" className="text-sm text-muted-foreground hover:text-accent transition-colors">Chat</Link>
           </div>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3">Company</h4>
           <div className="flex flex-col gap-2">
-            <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link>
-            <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link>
+            <Link to="/about" className="text-sm text-muted-foreground hover:text-accent transition-colors">About</Link>
+            <Link to="/team" className="text-sm text-muted-foreground hover:text-accent transition-colors">Team</Link>
+            <Link to="/b2b" className="text-sm text-muted-foreground hover:text-accent transition-colors">B2B Licensing</Link>
+            <Link to="/contact" className="text-sm text-muted-foreground hover:text-accent transition-colors">Contact</Link>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold text-foreground mb-3">Coaches</h4>
+          <div className="flex flex-col gap-2">
+            <Link to="/coach-onboarding" className="text-sm text-muted-foreground hover:text-accent transition-colors">Join as Coach</Link>
+            <Link to="/coach-apply" className="text-sm text-muted-foreground hover:text-accent transition-colors">Apply Now</Link>
           </div>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3">Legal</h4>
           <div className="flex flex-col gap-2">
-            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-accent transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm text-muted-foreground hover:text-accent transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
