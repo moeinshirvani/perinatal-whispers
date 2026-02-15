@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { BadgeCheck, Users, Calendar, Star, TrendingUp, ArrowRight, CreditCard } from "lucide-react";
+import { BadgeCheck, Users, Calendar, Star, TrendingUp, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const steps = [
-  { title: "Apply", description: "Submit your profile, credentials, and specializations." },
+  { title: "Apply", description: "Submit your profile, credentials, and specializations via our online form." },
   { title: "Verification Review", description: "Our team reviews your qualifications and prenatal/postnatal expertise." },
   { title: "Profile Goes Live", description: "Your verified profile appears in the directory with a Verified badge." },
-  { title: "Receive Referrals", description: "Get matched with users via AI recommendations and directory search." },
-  { title: "Enable Booking & Payouts", description: "Future integration for seamless one-tap scheduling and payments." },
+  { title: "Get Discovered", description: "Mothers find you via AI recommendations and directory search." },
+  { title: "Booking Integration", description: "As we scale, one-tap scheduling and secure payouts will be enabled for all verified coaches." },
 ];
 
 const benefits = [
@@ -86,22 +86,22 @@ const CoachOnboarding = () => (
         {/* Membership & Pricing */}
         <div className="mb-14 p-6 rounded-xl bg-primary/5 border border-primary/10">
           <div className="flex items-center gap-2 mb-4">
-            <CreditCard className="h-5 w-5 text-primary" />
+            <MessageCircle className="h-5 w-5 text-primary" />
             <h2 className="font-display text-xl font-bold text-foreground">Membership & Pricing</h2>
           </div>
           <div className="space-y-4 text-sm text-muted-foreground">
-            <div className="p-4 rounded-lg bg-background border border-border">
-              <p className="font-semibold text-foreground mb-1">Annual Membership</p>
-              <p className="text-2xl font-display font-bold text-primary">€___ / year</p>
-              <p className="text-xs mt-1">(Placeholder — final pricing to be determined)</p>
-            </div>
-            <p className="font-medium text-foreground">Alternative models under consideration:</p>
+            <p>
+              Annual membership is currently offered at <strong className="text-foreground">pilot pricing</strong> for
+              early-joining coaches. Apply to join and we will share the current rate with you, or reach out
+              via our contact page.
+            </p>
+            <p className="font-medium text-foreground">Monetization models under consideration:</p>
             <ul className="space-y-2">
-              <li className="flex items-start gap-2"><ArrowRight className="h-3 w-3 mt-1 shrink-0 text-accent" />Commission model: 15% per booking</li>
+              <li className="flex items-start gap-2"><ArrowRight className="h-3 w-3 mt-1 shrink-0 text-accent" />Commission model: 15% per booking (planned)</li>
               <li className="flex items-start gap-2"><ArrowRight className="h-3 w-3 mt-1 shrink-0 text-accent" />Annual membership fee</li>
               <li className="flex items-start gap-2"><ArrowRight className="h-3 w-3 mt-1 shrink-0 text-accent" />Affiliate/referral to your own booking system</li>
             </ul>
-            <p className="text-xs">Final model is flexible and may be adjusted based on community feedback.</p>
+            <p className="text-xs">The final model is flexible and may be adjusted based on community feedback and pilot outcomes.</p>
           </div>
         </div>
 
@@ -110,8 +110,8 @@ const CoachOnboarding = () => (
           <Button variant="hero" size="lg" asChild>
             <Link to="/coach-apply">Apply to Become Verified</Link>
           </Button>
-          <Button variant="hero-outline" size="lg" disabled>
-            Pay Annual Membership (Coming Soon)
+          <Button variant="hero-outline" size="lg" asChild>
+            <Link to="/contact">Talk to Us</Link>
           </Button>
         </div>
       </div>

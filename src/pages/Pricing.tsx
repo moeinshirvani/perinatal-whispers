@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
+import { Check, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -100,26 +100,45 @@ const Pricing = () => (
           ))}
         </div>
 
+        {/* For employers */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto mt-10 p-5 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-between flex-wrap gap-4"
+        >
+          <div>
+            <p className="text-sm font-semibold text-foreground">For employers & partners</p>
+            <p className="text-xs text-muted-foreground">Custom B2B licensing and white-label solutions available.</p>
+          </div>
+          <Button variant="hero-outline" size="sm" asChild>
+            <Link to="/b2b" className="inline-flex items-center gap-1">Learn more <ArrowRight className="h-3 w-3" /></Link>
+          </Button>
+        </motion.div>
+
         {/* Future Monetization */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-card shadow-soft"
+          className="max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-card shadow-soft"
         >
-          <h3 className="font-display text-lg font-bold text-foreground mb-4 text-center">Coming Next</h3>
+          <h3 className="font-display text-lg font-bold text-foreground mb-4 text-center">Planned Revenue Streams</h3>
           <div className="grid sm:grid-cols-3 gap-4 text-center">
             <div>
               <p className="text-sm font-semibold text-foreground mb-1">Booking Commission</p>
-              <p className="text-xs text-muted-foreground">15% of session fee when booking is live</p>
+              <p className="text-xs text-muted-foreground">15% per session booked through Mooie Geest</p>
+              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Next phase</span>
             </div>
             <div>
               <p className="text-sm font-semibold text-foreground mb-1">Affiliate Revenue</p>
-              <p className="text-xs text-muted-foreground">~10% on curated partner products</p>
+              <p className="text-xs text-muted-foreground">~10% on curated partner content & products</p>
+              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Next phase</span>
             </div>
             <div>
               <p className="text-sm font-semibold text-foreground mb-1">B2B Licensing</p>
-              <p className="text-xs text-muted-foreground">Enterprise / white-label contracts</p>
+              <p className="text-xs text-muted-foreground">Enterprise & white-label contracts</p>
+              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Contact sales</span>
             </div>
           </div>
         </motion.div>

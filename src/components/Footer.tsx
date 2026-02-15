@@ -1,5 +1,5 @@
-import { Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Footer = () => (
   <footer className="border-t border-border bg-card">
@@ -7,21 +7,29 @@ const Footer = () => (
       <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
         <div className="col-span-2 md:col-span-1">
           <Link to="/" className="flex items-center gap-2 mb-3">
-            <Leaf className="h-5 w-5 text-secondary" />
+            <img src={logo} alt="Mooie Geest logo" className="h-7 w-auto" />
             <span className="font-display text-lg font-semibold text-foreground">Mooie Geest</span>
           </Link>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
             Empowering every expectant mother in the Netherlands with accessible, personalized mental wellness support.
           </p>
+          <div className="text-xs text-muted-foreground space-y-0.5">
+            <p>Reaal 189, Leiderdorp</p>
+            <p>The Netherlands, 2353TK</p>
+            <p>VAT: NL005202551B81</p>
+            <p>
+              <a href="mailto:hello@mooiegeest.com" className="hover:text-accent transition-colors">hello@mooiegeest.com</a>
+            </p>
+          </div>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3">Product</h4>
           <div className="flex flex-col gap-2">
             <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-accent transition-colors">How it Works</Link>
+            <Link to="/chat" className="text-sm text-muted-foreground hover:text-accent transition-colors">Chat</Link>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-accent transition-colors">Pricing</Link>
             <Link to="/coaches" className="text-sm text-muted-foreground hover:text-accent transition-colors">Coaches</Link>
-            <Link to="/chat" className="text-sm text-muted-foreground hover:text-accent transition-colors">Chat</Link>
           </div>
         </div>
 
@@ -29,6 +37,7 @@ const Footer = () => (
           <h4 className="text-sm font-semibold text-foreground mb-3">Company</h4>
           <div className="flex flex-col gap-2">
             <Link to="/about" className="text-sm text-muted-foreground hover:text-accent transition-colors">About</Link>
+            <Link to="/vision" className="text-sm text-muted-foreground hover:text-accent transition-colors">Vision</Link>
             <Link to="/team" className="text-sm text-muted-foreground hover:text-accent transition-colors">Team</Link>
             <Link to="/b2b" className="text-sm text-muted-foreground hover:text-accent transition-colors">B2B Licensing</Link>
             <Link to="/contact" className="text-sm text-muted-foreground hover:text-accent transition-colors">Contact</Link>

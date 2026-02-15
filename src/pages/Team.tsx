@@ -3,23 +3,26 @@ import { Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import moeinPhoto from "@/assets/moein.png";
+import mahboobehPhoto from "@/assets/mahboobeh.png";
+import majidPhoto from "@/assets/majid.png";
 
 const founders = [
   {
     name: "Moein Shirvani",
     role: "CEO & Co-Founder",
-    location: "Leiden, The Netherlands",
+    location: "Leiderdorp, The Netherlands",
     linkedin: "https://linkedin.com/in/moeinshirvani",
     bio: "Experienced web developer building Mooie Geest to guide mothers to practices that truly work. Passionate about leveraging technology for maternal wellness.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: moeinPhoto,
   },
   {
     name: "Mahboobeh Habibi",
     role: "Chief Wellness Officer & Co-Founder",
-    location: "Leiden, The Netherlands",
-    linkedin: "https://linkedin.com/in/mahboobehhabibi",
-    bio: "7+ years in yoga & holistic wellness. E-RYT 500, Reiki Master Teacher, Life Coach, and Meditation Instructor — bringing deep expertise to every aspect of the platform.",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+    location: "Leiderdorp, The Netherlands",
+    linkedin: "https://www.linkedin.com/in/mahboobeh-habibi-b64b93338/",
+    bio: "7+ years in yoga & holistic wellness. E-RYT 500, Reiki Master Teacher, Life Coach, and Meditation Instructor — bringing deep expertise in prenatal and postnatal care to every aspect of the platform.",
+    image: mahboobehPhoto,
   },
 ];
 
@@ -30,7 +33,7 @@ const team = [
     location: "Istanbul, Türkiye",
     linkedin: "https://linkedin.com/in/majidseyedmiri",
     bio: "Full-stack developer bringing technical excellence to the Mooie Geest platform.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    image: majidPhoto,
   },
 ];
 
@@ -71,7 +74,7 @@ const Team = () => {
                 transition={{ delay: i * 0.1 }}
                 className="rounded-xl bg-card shadow-soft overflow-hidden"
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="aspect-square overflow-hidden bg-muted">
                   <img src={person.image} alt={person.name} className="w-full h-full object-cover" loading="lazy" />
                 </div>
                 <div className="p-5">

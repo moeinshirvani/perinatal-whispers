@@ -14,6 +14,16 @@ const weeklyBlueprints = [
   { title: "Gentle Stretching", duration: "10 min", type: "Movement" },
 ];
 
+const trendData = [
+  { day: "Mon", mood: 4, sleep: 7 },
+  { day: "Tue", mood: 3, sleep: 6 },
+  { day: "Wed", mood: 4, sleep: 7.5 },
+  { day: "Thu", mood: 3, sleep: 6.5 },
+  { day: "Fri", mood: 5, sleep: 8 },
+  { day: "Sat", mood: 4, sleep: 7 },
+  { day: "Sun", mood: 4, sleep: 7.5 },
+];
+
 const Profile = () => (
   <div className="min-h-screen bg-background">
     <Navbar />
@@ -67,7 +77,7 @@ const Profile = () => (
             </div>
           </div>
 
-          {/* Trend Visualization (placeholder) */}
+          {/* Trend Visualization */}
           <div className="p-6 rounded-xl bg-card shadow-soft mb-8 relative overflow-hidden">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-5 w-5 text-primary" />
@@ -78,15 +88,28 @@ const Profile = () => (
                 <button key={range} className="px-3 py-1 rounded-full text-xs bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors">{range}</button>
               ))}
             </div>
-            {/* Placeholder chart */}
-            <div className="h-32 bg-muted/50 rounded-lg flex items-center justify-center relative">
+            {/* Simple bar visualization */}
+            <div className="h-36 flex items-end gap-2 px-2 relative">
+              {trendData.map((d) => (
+                <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
+                  <div className="w-full flex gap-0.5 justify-center">
+                    <div className="w-3 rounded-t bg-primary/60" style={{ height: `${d.mood * 20}%` }} />
+                    <div className="w-3 rounded-t bg-secondary/60" style={{ height: `${(d.sleep / 10) * 100}%` }} />
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">{d.day}</span>
+                </div>
+              ))}
               <div className="absolute inset-0 backdrop-blur-sm bg-background/60 flex flex-col items-center justify-center rounded-lg">
                 <Lock className="h-5 w-5 text-muted-foreground mb-2" />
-                <p className="text-sm text-muted-foreground">Full trends available on Premium</p>
+                <p className="text-sm text-muted-foreground font-medium">Upgrade to Premium to unlock full insights</p>
                 <Button variant="default" size="sm" className="mt-2" asChild>
                   <Link to="/pricing">Upgrade — €12/mo</Link>
                 </Button>
               </div>
+            </div>
+            <div className="flex gap-4 mt-3 justify-center text-xs text-muted-foreground">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-primary/60" /> Mood</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-secondary/60" /> Sleep</span>
             </div>
           </div>
 

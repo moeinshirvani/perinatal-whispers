@@ -1,22 +1,13 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Heart, Leaf, Shield, Brain, TrendingUp, Zap, ArrowRight, AlertTriangle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Heart, Leaf, Shield, Brain, TrendingUp, Zap, AlertTriangle } from "lucide-react";
 
 const innovationPillars = [
   { icon: Brain, title: "Context-Aware AI", description: "Understands pregnancy-specific language, emotional cues, and stress signals." },
-  { icon: TrendingUp, title: "Self-Evolving Care Plans", description: "Learns from your mood patterns and engagement to refine recommendations." },
+  { icon: TrendingUp, title: "Self-Evolving Care Plans", description: "Learns from your mood patterns and engagement to refine recommendations over time." },
   { icon: AlertTriangle, title: "Anticipatory Risk Detection", description: "Spots subtle trend shifts early so you can seek support proactively." },
   { icon: Zap, title: "Instant Insight-to-Action", description: "Recommendations link directly to coaches and scheduling for seamless follow-through." },
-];
-
-const roadmap = [
-  { phase: "Phase 1", title: "Ideation & Validation", period: "Nov 2024 – Sep 2025", items: ["User interviews & competitor mapping", "Early prototype development", "MOUs with first coaches"] },
-  { phase: "Phase 2", title: "R&D & Prototyping", period: "Nov 2025 – Dec 2026", items: ["Design & validate AI wellness questionnaire", "Curate content partnerships", "Develop dashboard prototypes", "Refine recommendation logic"], current: true },
-  { phase: "Phase 3", title: "MVP & Pilot", period: "Jan 2027 – Dec 2027", items: ["Launch MVP product", "Integrate instructor network", "Onboard pilot users"] },
-  { phase: "Phase 4", title: "Full Scale", period: "Jan 2028 – Dec 2029", items: ["Dashboard + booking + payments", "Subscription + commission model", "Grow users, coaches, B2B partnerships"] },
 ];
 
 const About = () => (
@@ -29,6 +20,18 @@ const About = () => (
           <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6 text-center">
             About Mooie Geest
           </h1>
+
+          {/* What We Do */}
+          <div className="mb-12">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">What We Do</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Mooie Geest is a chat-first AI companion for pregnancy and postpartum mental wellness.
+              We combine AI-guided onboarding and ongoing support with an Adaptive Guidance Engine
+              that delivers trimester-aware routines evolving with your feedback. Daily check-ins
+              track mood, sleep, and stress, while curated resources and a light marketplace of
+              vetted coaches provide actionable pathways to real support.
+            </p>
+          </div>
 
           {/* Our Story */}
           <div className="mb-12">
@@ -53,8 +56,8 @@ const About = () => (
           <div className="grid gap-6 mb-12">
             {[
               { icon: Heart, title: "Compassionate Support", text: "Every interaction is designed to make mothers feel heard, supported, and empowered — never judged." },
-              { icon: Leaf, title: "Holistic Approach", text: "We're not a medical service. We offer a safe space for daily reflection, guided routines, and connection to certified wellness coaches." },
-              { icon: Shield, title: "Privacy First", text: "Your conversations are private and encrypted. We never share personal data with third parties." },
+              { icon: Leaf, title: "Holistic Approach", text: "We offer a safe space for daily reflection, guided routines, and connection to certified wellness coaches. We are not a medical service." },
+              { icon: Shield, title: "Privacy First", text: "Your conversations are private and encrypted. We never sell personal data to third parties." },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -75,19 +78,24 @@ const About = () => (
             ))}
           </div>
 
-          {/* Why Mooie Geest */}
+          {/* Competitive Differentiation */}
           <div className="mb-12">
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">Why Mooie Geest</h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Mooie Geest is the <span className="font-semibold text-foreground">only platform</span> combining:
-              Adaptive Guidance Engine, AI-driven onboarding, mood analytics, trimester-aware routines,
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Mooie Geest is the <span className="font-semibold text-foreground">only platform</span> combining
+              an Adaptive Guidance Engine, AI-driven onboarding, mood analytics, trimester-aware routines,
               yoga & meditation library, dashboard tracking, and one-tap booking — in one integrated perinatal solution.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Unlike generic chatbots or single-session coaching, Mooie Geest provides continuous, evolving support
+              that adapts to your pregnancy stage and daily wellbeing. Our curated content and verified coach
+              network ensure you always have actionable pathways to real help.
             </p>
           </div>
 
           {/* Innovation Pillars */}
           <div className="mb-12">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-6">Innovation Pillars</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-6">Innovation</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {innovationPillars.map((pillar, i) => (
                 <motion.div
@@ -106,48 +114,13 @@ const About = () => (
             </div>
           </div>
 
-          {/* Vision & Roadmap */}
-          <div className="mb-12">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-6">Vision & Roadmap</h2>
-            <div className="space-y-6">
-              {roadmap.map((phase, i) => (
-                <motion.div
-                  key={phase.phase}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`relative pl-8 border-l-2 ${phase.current ? "border-primary" : "border-border"}`}
-                >
-                  <div className={`absolute left-[-9px] top-0 w-4 h-4 rounded-full ${phase.current ? "bg-primary" : "bg-border"}`} />
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-sm font-semibold text-primary">{phase.phase}</span>
-                    <span className="text-xs text-muted-foreground">{phase.period}</span>
-                    {phase.current && (
-                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">Current</span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-base font-semibold text-foreground mb-2">{phase.title}</h3>
-                  <ul className="space-y-1">
-                    {phase.items.map((item) => (
-                      <li key={item} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <ArrowRight className="h-3 w-3 mt-1 shrink-0 text-accent" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
           {/* Safety */}
           <div className="p-5 rounded-xl bg-muted border border-border">
-            <h3 className="font-display text-base font-semibold text-foreground mb-2">Safety Note</h3>
+            <h3 className="font-display text-base font-semibold text-foreground mb-2">Safety & Disclaimer</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Mooie Geest is not a medical service and does not provide medical advice or diagnosis.
-              If you are in crisis, please contact your healthcare provider or the Dutch crisis line
-              (113 Zelfmoordpreventie: 0900-0113).
+              If you are in crisis, please contact your healthcare provider, call 112, or reach the
+              Dutch crisis line 113 Zelfmoordpreventie (0900-0113, available 24/7).
             </p>
           </div>
         </motion.div>

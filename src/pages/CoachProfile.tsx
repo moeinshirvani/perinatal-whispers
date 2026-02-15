@@ -4,6 +4,7 @@ import { MapPin, Star, BadgeCheck, ArrowLeft, Calendar, Globe } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useState } from "react";
 
 const coachesData: Record<string, {
   name: string; specialty: string; location: string; rating: number; verified: boolean;
@@ -57,6 +58,7 @@ const coachesData: Record<string, {
 const CoachProfile = () => {
   const { slug } = useParams<{ slug: string }>();
   const coach = slug ? coachesData[slug] : null;
+  const [sessionRequested, setSessionRequested] = useState(false);
 
   if (!coach) {
     return (
@@ -99,7 +101,9 @@ const CoachProfile = () => {
                   <span className="flex items-center gap-1"><Globe className="h-3.5 w-3.5" /> {coach.languages}</span>
                 </div>
               </div>
-              <Button variant="hero" size="lg">Book a Class</Button>
+              <Button variant="hero" size="lg" onClick={() => document.getElementById("request-form")?.scrollIntoView({ behavior: "smooth" })}>
+                Request Booking
+              </Button>
             </div>
 
             <div className="space-y-8">
@@ -132,23 +136,27 @@ const CoachProfile = () => {
                         <Calendar className="h-5 w-5 text-primary" />
                         <span className="text-sm font-medium text-foreground">{cls.name}</span>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm text-muted-foreground">{cls.price}</span>
-                        <Button variant="outline" size="sm">Book</Button>
-                      </div>
+                      <span className="text-sm text-muted-foreground">{cls.price}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 rounded-xl bg-card shadow-soft">
-                <h2 className="font-display text-xl font-bold text-foreground mb-3">Request a Session</h2>
-                <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-                  <input type="text" placeholder="Your name" className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                  <input type="email" placeholder="Your email" className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                  <textarea placeholder="Message (optional)" rows={3} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
-                  <Button variant="secondary" className="w-full">Send Request</Button>
-                </form>
+              <div id="request-form" className="p-6 rounded-xl bg-card shadow-soft">
+                <h2 className="font-display text-xl font-bold text-foreground mb-1">Request a Session</h2>
+                <p className="text-xs text-muted-foreground mb-4">Pilot phase — the coach will follow up to confirm scheduling and payment.</p>
+                {sessionRequested ? (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-4">
+                    <p className="text-sm font-medium text-secondary">✓ Request sent! The coach will contact you soon.</p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={(e) => { e.preventDefault(); setSessionRequested(true); }} className="space-y-3">
+                    <input type="text" placeholder="Your name" required className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
+                    <input type="email" placeholder="Your email" required className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
+                    <textarea placeholder="Message (optional)" rows={3} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+                    <Button variant="secondary" className="w-full" type="submit">Send Request</Button>
+                  </form>
+                )}
               </div>
             </div>
           </motion.div>
