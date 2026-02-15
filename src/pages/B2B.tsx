@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Globe, Shield, Users } from "lucide-react";
+import { Building2, Globe, Shield, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -42,13 +42,40 @@ const B2B = () => (
           ))}
         </div>
 
+        {/* Pricing model */}
+        <div className="mb-12 p-6 rounded-xl bg-card shadow-soft">
+          <h2 className="font-display text-xl font-bold text-foreground mb-4">Pricing</h2>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              B2B licensing is available through custom contracts tailored to your organization's needs and scale.
+              Pricing is based on the number of users and level of customization required.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-3 mt-4">
+              <div className="p-3 rounded-lg bg-background border border-border text-center">
+                <p className="font-semibold text-foreground text-sm">User Subscription</p>
+                <p className="text-xs">€12/mo per individual user</p>
+              </div>
+              <div className="p-3 rounded-lg bg-background border border-border text-center">
+                <p className="font-semibold text-foreground text-sm">Booking Commission</p>
+                <p className="text-xs">15% per session booked</p>
+                <span className="text-[10px] text-accent">Planned</span>
+              </div>
+              <div className="p-3 rounded-lg bg-background border border-border text-center">
+                <p className="font-semibold text-foreground text-sm">Affiliate Revenue</p>
+                <p className="text-xs">~10% on partner products</p>
+                <span className="text-[10px] text-accent">Planned</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center p-8 rounded-xl bg-primary/5 border border-primary/10">
           <h2 className="font-display text-2xl font-bold text-foreground mb-3">Interested?</h2>
           <p className="text-muted-foreground mb-6">
             Let's discuss how Mooie Geest can support your organization's perinatal wellness needs.
           </p>
           <Button variant="hero" size="lg" asChild>
-            <Link to="/contact">Talk to Us</Link>
+            <Link to="/contact">Request a B2B Demo</Link>
           </Button>
         </div>
       </div>

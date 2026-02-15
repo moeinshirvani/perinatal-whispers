@@ -87,9 +87,9 @@ const CoachApply = () => {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-foreground">Credentials (upload placeholder)</label>
-              <div className="mt-1 p-4 rounded-lg border-2 border-dashed border-border text-center text-sm text-muted-foreground">
-                Drag & drop or click to upload (PDF, JPG)
+              <label className="text-sm font-medium text-foreground">Credentials</label>
+              <div className="mt-1 p-4 rounded-lg border-2 border-dashed border-border text-center text-sm text-muted-foreground cursor-pointer hover:border-primary/40 transition-colors">
+                Drag & drop or click to upload your certificates (PDF, JPG)
               </div>
             </div>
 
