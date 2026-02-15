@@ -7,45 +7,45 @@ import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-image.jpg";
 
 const features = [
-  {
-    icon: Brain,
-    title: "Adaptive Guidance Engine",
-    description: "Trimester-aware routines that evolve with your feedback and pregnancy stage.",
-  },
-  {
-    icon: MessageCircle,
-    title: "AI-Powered Onboarding",
-    description: "A friendly 10-question chat builds your personal Wellness Profile in under 2 minutes.",
-  },
-  {
-    icon: BarChart3,
-    title: "Mood & Sleep Analytics",
-    description: "Track daily mood, sleep, and stress with clear real-time trend visualization.",
-  },
-  {
-    icon: Sparkles,
-    title: "Yoga & Meditation Library",
-    description: "Curated prenatal and postnatal yoga, breathwork, and meditation routines.",
-  },
-  {
-    icon: Heart,
-    title: "Dashboard Tracking",
-    description: "See your wellness journey at a glance with personalized insights and goals.",
-  },
-  {
-    icon: Calendar,
-    title: "One-Tap Coach Booking",
-    description: "Find vetted prenatal coaches and schedule sessions with a single tap.",
-  },
-];
+{
+  icon: Brain,
+  title: "Adaptive Guidance Engine",
+  description: "Trimester-aware routines that evolve with your feedback and pregnancy stage."
+},
+{
+  icon: MessageCircle,
+  title: "AI-Powered Onboarding",
+  description: "A friendly 10-question chat builds your personal Wellness Profile in under 2 minutes."
+},
+{
+  icon: BarChart3,
+  title: "Mood & Sleep Analytics",
+  description: "Track daily mood, sleep, and stress with clear real-time trend visualization."
+},
+{
+  icon: Sparkles,
+  title: "Yoga & Meditation Library",
+  description: "Curated prenatal and postnatal yoga, breathwork, and meditation routines."
+},
+{
+  icon: Heart,
+  title: "Dashboard Tracking",
+  description: "See your wellness journey at a glance with personalized insights and goals."
+},
+{
+  icon: Calendar,
+  title: "One-Tap Coach Booking",
+  description: "Find vetted prenatal coaches and schedule sessions with a single tap."
+}];
+
 
 const steps = [
-  { step: "1", title: "Instant PWA Access", description: "Add to Home Screen — no downloads needed." },
-  { step: "2", title: "AI Onboarding", description: "10-question friendly chat generates your Wellness Profile." },
-  { step: "3", title: "Daily Dashboard", description: "Mood & sleep tracking with clear real-time trends." },
-  { step: "4", title: "Weekly Blueprints", description: "Trimester-aware yoga, breathwork & meditation routines." },
-  { step: "5", title: "Book & Upgrade", description: "Seamless booking + tiered service: free or €12/mo premium." },
-];
+{ step: "1", title: "Instant PWA Access", description: "Add to Home Screen — no downloads needed." },
+{ step: "2", title: "AI Onboarding", description: "10-question friendly chat generates your Wellness Profile." },
+{ step: "3", title: "Daily Dashboard", description: "Mood & sleep tracking with clear real-time trends." },
+{ step: "4", title: "Weekly Blueprints", description: "Trimester-aware yoga, breathwork & meditation routines." },
+{ step: "5", title: "Book & Upgrade", description: "Seamless booking + tiered service: free or €12/mo premium." }];
+
 
 const Landing = () => {
   return (
@@ -60,8 +60,8 @@ const Landing = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+              transition={{ duration: 0.6 }}>
+
               <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
                 Your perinatal wellness companion
               </span>
@@ -89,15 +89,15 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
+              className="relative">
+
               <div className="rounded-2xl overflow-hidden shadow-elevated">
                 <img
-                  src={heroImage}
+
                   alt="Peaceful pregnant woman in a serene garden"
                   className="w-full h-auto object-cover"
-                  loading="lazy"
-                />
+                  loading="lazy" src="/lovable-uploads/0c6c73a4-72ba-4351-8485-a9de4fb35d42.png" />
+
               </div>
             </motion.div>
           </div>
@@ -111,8 +111,8 @@ const Landing = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+            className="text-center mb-12">
+
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               What Makes Us Different
             </h2>
@@ -123,15 +123,15 @@ const Landing = () => {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-background shadow-soft hover:shadow-card transition-shadow"
-              >
+            {features.map((feature, i) =>
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-6 rounded-xl bg-background shadow-soft hover:shadow-card transition-shadow">
+
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <feature.icon className="h-5 w-5 text-primary" />
                 </div>
@@ -142,7 +142,7 @@ const Landing = () => {
                   {feature.description}
                 </p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -154,30 +154,30 @@ const Landing = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+            className="text-center mb-12">
+
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               How It Works
             </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-5 gap-6 max-w-5xl mx-auto">
-            {steps.map((s, i) => (
-              <motion.div
-                key={s.step}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center"
-              >
+            {steps.map((s, i) =>
+            <motion.div
+              key={s.step}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="text-center">
+
                 <div className="w-12 h-12 rounded-full gradient-accent text-primary-foreground flex items-center justify-center mx-auto mb-4 font-display font-bold text-lg">
                   {s.step}
                 </div>
                 <h3 className="font-display text-base font-semibold text-foreground mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.description}</p>
               </motion.div>
-            ))}
+            )}
           </div>
 
           <div className="text-center mt-10">
@@ -197,8 +197,8 @@ const Landing = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
+            className="max-w-3xl mx-auto text-center">
+
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
               Exceptional Value
             </h2>
@@ -209,16 +209,16 @@ const Landing = () => {
             </p>
             <div className="grid sm:grid-cols-3 gap-6">
               {[
-                { label: "On-Demand Support", value: "24/7", desc: "AI companion available anytime" },
-                { label: "Premium Plan", value: "€12/mo", desc: "vs. €80–€120 per session" },
-                { label: "Personalized", value: "100%", desc: "Tailored to your stage & needs" },
-              ].map((stat) => (
-                <div key={stat.label} className="p-5 rounded-xl bg-background shadow-soft">
+              { label: "On-Demand Support", value: "24/7", desc: "AI companion available anytime" },
+              { label: "Premium Plan", value: "€12/mo", desc: "vs. €80–€120 per session" },
+              { label: "Personalized", value: "100%", desc: "Tailored to your stage & needs" }].
+              map((stat) =>
+              <div key={stat.label} className="p-5 rounded-xl bg-background shadow-soft">
                   <p className="text-3xl font-display font-bold text-primary mb-1">{stat.value}</p>
                   <p className="text-sm font-semibold text-foreground mb-1">{stat.label}</p>
                   <p className="text-xs text-muted-foreground">{stat.desc}</p>
                 </div>
-              ))}
+              )}
             </div>
           </motion.div>
         </div>
@@ -231,8 +231,8 @@ const Landing = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-xl mx-auto text-center"
-          >
+            className="max-w-xl mx-auto text-center">
+
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               Ready to Begin?
             </h2>
@@ -247,8 +247,8 @@ const Landing = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Landing;
