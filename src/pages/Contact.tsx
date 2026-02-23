@@ -55,12 +55,12 @@ const Contact = () => {
               {submitted ? (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-8 rounded-xl bg-card shadow-soft text-center">
                   <Mail className="h-8 w-8 text-secondary mx-auto mb-4" />
-                  <h2 className="font-display text-xl font-bold text-foreground mb-2">Message Sent!</h2>
-                  <p className="text-sm text-muted-foreground">Thank you for reaching out. We'll get back to you soon.</p>
+                  <h2 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h2>
+                  <p className="text-sm text-muted-foreground">Thank you — we've received your message and will get back to you shortly.</p>
                 </motion.div>
               ) : (
                 <div className="p-6 rounded-xl bg-card shadow-soft">
-                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4" action="https://formsubmit.co/moeinshirvani90@gmail.com" method="POST">
                     <div>
                       <label className="text-sm font-medium text-foreground">Name</label>
                       <input type="text" required className="w-full mt-1 px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />

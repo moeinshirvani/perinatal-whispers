@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import mahboobehImg from "@/assets/mahboobeh.png";
 
 const categories = ["All", "Yoga", "Meditation", "Breathwork", "Sound Healing", "More"];
 const subcategories: Record<string, string[]> = {
@@ -15,6 +16,12 @@ const subcategories: Record<string, string[]> = {
 };
 
 const coaches = [
+  {
+    id: 0, slug: "mahboobeh-habibi", name: "Mahboobeh Habibi", specialty: "Prenatal & Postnatal Yoga", category: "Yoga",
+    location: "Leiderdorp", language: "EN, NL", rating: 5.0, verified: true,
+    bio: "Prenatal and postnatal yoga teacher with 7+ years of holistic wellness experience. E-RYT 500 certified, Reiki Master, and meditation instructor.",
+    image: mahboobehImg, cta: "Book a Yoga Class",
+  },
   {
     id: 1, slug: "emma-van-der-berg", name: "Emma van der Berg", specialty: "Prenatal Yoga", category: "Yoga",
     location: "Amsterdam", language: "EN, NL", rating: 4.9, verified: true,
@@ -72,7 +79,7 @@ const Coaches = () => {
       <section className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container px-4 md:px-8">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+            <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-3">
               Meet Our Coaches
             </h1>
             <p className="text-muted-foreground max-w-md mx-auto">
@@ -127,7 +134,7 @@ const Coaches = () => {
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-display text-lg font-semibold text-foreground">{coach.name}</h3>
+                      <h3 className="text-lg font-semibold text-foreground">{coach.name}</h3>
                       {coach.verified && <BadgeCheck className="h-4 w-4 text-secondary" />}
                     </div>
                     <div className="flex items-center gap-1 text-primary">
@@ -142,8 +149,8 @@ const Coaches = () => {
                     <span className="text-xs ml-2">{coach.language}</span>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">{coach.bio}</p>
-                  <Button variant="outline" size="sm" className="w-full" asChild>
-                    <Link to={`/coaches/${coach.slug}`}>View Profile</Link>
+                  <Button variant={coach.cta ? "hero" : "outline"} size="sm" className="w-full" asChild>
+                    <Link to={`/coaches/${coach.slug}`}>{coach.cta || "View Profile"}</Link>
                   </Button>
                 </div>
               </motion.div>
