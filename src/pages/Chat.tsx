@@ -34,8 +34,9 @@ const personalPlan = `Thank you for sharing all of that with me. 💛 Based on y
 • 📝 Quick mood check-in
 
 **Recommended for you:**
-• [Prenatal Yoga with Emma](/coaches/emma-van-der-berg) — Tuesdays & Thursdays
-• [Breathwork Basics](/coaches/lisa-jansen) — guided series
+• [Prenatal & Postnatal Yoga with Mahboobeh](/coaches/mahboobeh-habibi) — book a live class
+• [Breathwork Basics with Lisa](/coaches/lisa-jansen) — guided series
+• [Mindful Pregnancy with Sofie](/coaches/sofie-de-vries) — meditation sessions
 
 You can come back here anytime to chat. I'll learn from our conversations and adapt your plan as you progress. 🌱`;
 

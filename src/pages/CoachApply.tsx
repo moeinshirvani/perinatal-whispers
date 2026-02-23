@@ -23,8 +23,8 @@ const CoachApply = () => {
           <div className="container px-4 md:px-8 max-w-md mx-auto">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-8 rounded-xl bg-card shadow-soft text-center">
               <CheckCircle className="h-12 w-12 text-secondary mx-auto mb-4" />
-              <h1 className="text-2xl font-display font-bold text-foreground mb-2">Application Submitted!</h1>
-              <p className="text-sm text-muted-foreground">Thank you for applying. We will review your credentials and contact you within 5 business days.</p>
+              <h1 className="text-2xl font-semibold text-foreground mb-2">Application Submitted!</h1>
+              <p className="text-sm text-muted-foreground">Thank you — we've received your message and will get back to you shortly.</p>
             </motion.div>
           </div>
         </section>
