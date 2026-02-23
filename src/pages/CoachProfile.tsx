@@ -9,12 +9,23 @@ import mahboobehImg from "@/assets/mahboobeh.png";
 
 const CALENDLY_URL = "https://calendly.com/m-habibi6869/yoga-class?hide_event_type_details=1&hide_gdpr_banner=1";
 
-const coachesData: Record<string, {
-  name: string; specialty: string; location: string; rating: number; verified: boolean;
-  bio: string; credentials: string; classes: { name: string; price: string; bookable?: boolean }[];
-  image: string; languages: string; titles?: string[];
-  calendlyUrl?: string;
-}> = {
+const coachesData: Record<
+  string,
+  {
+    name: string;
+    specialty: string;
+    location: string;
+    rating: number;
+    verified: boolean;
+    bio: string;
+    credentials: string;
+    classes: { name: string; price: string; bookable?: boolean }[];
+    image: string;
+    languages: string;
+    titles?: string[];
+    calendlyUrl?: string;
+  }
+> = {
   "mahboobeh-habibi": {
     name: "Mahboobeh Habibi",
     specialty: "Prenatal & Postnatal Yoga",
@@ -34,46 +45,91 @@ const coachesData: Record<string, {
     calendlyUrl: CALENDLY_URL,
   },
   "emma-van-der-berg": {
-    name: "Emma van der Berg", specialty: "Prenatal Yoga", location: "Amsterdam", rating: 4.9, verified: true,
+    name: "Emma van der Berg",
+    specialty: "Prenatal Yoga",
+    location: "Amsterdam",
+    rating: 4.9,
+    verified: true,
     bio: "Certified prenatal yoga instructor with 8 years of experience supporting mothers through mindful movement. Emma's classes focus on building strength, flexibility, and emotional resilience throughout pregnancy.",
     credentials: "RYT 500, Prenatal Yoga Certification, CPR Certified",
-    classes: [{ name: "Prenatal Yoga Flow", price: "€25/session" }, { name: "Gentle Birth Prep", price: "€30/session" }],
-    image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=800&h=600&fit=crop", languages: "English, Dutch",
+    classes: [
+      { name: "Prenatal Yoga Flow", price: "€25/session" },
+      { name: "Gentle Birth Prep", price: "€30/session" },
+    ],
+    image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=800&h=600&fit=crop",
+    languages: "English, Dutch",
   },
   "sofie-de-vries": {
-    name: "Sofie de Vries", specialty: "Meditation & Mindfulness", location: "Rotterdam", rating: 4.8, verified: true,
+    name: "Sofie de Vries",
+    specialty: "Meditation & Mindfulness",
+    location: "Rotterdam",
+    rating: 4.8,
+    verified: true,
     bio: "Mindfulness teacher specializing in pregnancy-related anxiety and postpartum emotional wellbeing. Sofie combines evidence-based techniques with compassionate guidance.",
     credentials: "MBSR Certified, Psychology MSc, 6+ years experience",
-    classes: [{ name: "Mindful Pregnancy", price: "€20/session" }, { name: "Postpartum Peace", price: "€20/session" }],
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop", languages: "English, Dutch",
+    classes: [
+      { name: "Mindful Pregnancy", price: "€20/session" },
+      { name: "Postpartum Peace", price: "€20/session" },
+    ],
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop",
+    languages: "English, Dutch",
   },
   "lisa-jansen": {
-    name: "Lisa Jansen", specialty: "Breathwork", location: "Utrecht", rating: 4.7, verified: true,
+    name: "Lisa Jansen",
+    specialty: "Breathwork",
+    location: "Utrecht",
+    rating: 4.7,
+    verified: true,
     bio: "Breathwork facilitator helping mothers prepare for birth and manage postpartum stress through conscious breathing techniques.",
     credentials: "Certified Breathwork Facilitator, Doula Training",
-    classes: [{ name: "Birth Breathwork", price: "€22/session" }, { name: "Stress Relief Breathing", price: "€18/session" }],
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=600&fit=crop", languages: "Dutch",
+    classes: [
+      { name: "Birth Breathwork", price: "€22/session" },
+      { name: "Stress Relief Breathing", price: "€18/session" },
+    ],
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=600&fit=crop",
+    languages: "Dutch",
   },
   "anna-bakker": {
-    name: "Anna Bakker", specialty: "Sound Healing", location: "Den Haag", rating: 5.0, verified: true,
+    name: "Anna Bakker",
+    specialty: "Sound Healing",
+    location: "Den Haag",
+    rating: 5.0,
+    verified: true,
     bio: "Sound healing practitioner creating nurturing sonic experiences for expectant and new mothers using singing bowls and harmonic instruments.",
     credentials: "Sound Healing Certification, Reiki Level 2",
-    classes: [{ name: "Prenatal Sound Bath", price: "€35/session" }, { name: "Healing Harmonics", price: "€30/session" }],
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=600&fit=crop", languages: "English, Dutch",
+    classes: [
+      { name: "Prenatal Sound Bath", price: "€35/session" },
+      { name: "Healing Harmonics", price: "€30/session" },
+    ],
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=600&fit=crop",
+    languages: "English, Dutch",
   },
   "mira-patel": {
-    name: "Mira Patel", specialty: "Postnatal Yoga", location: "Amsterdam", rating: 4.9, verified: true,
+    name: "Mira Patel",
+    specialty: "Postnatal Yoga",
+    location: "Amsterdam",
+    rating: 4.9,
+    verified: true,
     bio: "Postnatal recovery specialist combining gentle yoga with pelvic floor restoration techniques for new mothers.",
     credentials: "RYT 200, Postnatal Specialist Certification",
-    classes: [{ name: "Postnatal Recovery", price: "€25/session" }, { name: "Mom & Baby Yoga", price: "€22/session" }],
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=600&fit=crop", languages: "English",
+    classes: [
+      { name: "Postnatal Recovery", price: "€25/session" },
+      { name: "Mom & Baby Yoga", price: "€22/session" },
+    ],
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=600&fit=crop",
+    languages: "English",
   },
   "julia-smit": {
-    name: "Julia Smit", specialty: "Guided Meditation", location: "Eindhoven", rating: 4.8, verified: false,
+    name: "Julia Smit",
+    specialty: "Guided Meditation",
+    location: "Eindhoven",
+    rating: 4.8,
+    verified: false,
     bio: "Guided meditation specialist focused on relaxation techniques for expectant and new mothers.",
     credentials: "Meditation Teacher Training, 4 years experience",
     classes: [{ name: "Deep Relaxation", price: "€18/session" }],
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop", languages: "Dutch",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop",
+    languages: "Dutch",
   },
 };
 
@@ -101,7 +157,9 @@ const CoachProfile = () => {
         <Navbar />
         <div className="pt-32 text-center">
           <h1 className="text-2xl font-semibold text-foreground mb-4">Coach not found</h1>
-          <Button variant="outline" asChild><Link to="/coaches">Back to Coaches</Link></Button>
+          <Button variant="outline" asChild>
+            <Link to="/coaches">Back to Coaches</Link>
+          </Button>
         </div>
         <Footer />
       </div>
@@ -114,13 +172,16 @@ const CoachProfile = () => {
 
       <section className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container px-4 md:px-8 max-w-3xl mx-auto">
-          <Link to="/coaches" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6">
+          <Link
+            to="/coaches"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
+          >
             <ArrowLeft className="h-4 w-4" /> Back to Coaches
           </Link>
 
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div className="rounded-xl overflow-hidden shadow-card mb-8">
-              <img src={coach.image} alt={coach.name} className="w-full h-64 object-cover" />
+              <img src={coach.image} alt={coach.name} className="w-64 h-64 object-cover" />
             </div>
 
             <div className="flex items-start justify-between flex-wrap gap-4 mb-6">
@@ -132,23 +193,42 @@ const CoachProfile = () => {
                 {coach.titles && (
                   <div className="flex flex-wrap gap-2 mb-2">
                     {coach.titles.map((t) => (
-                      <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{t}</span>
+                      <span
+                        key={t}
+                        className="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium"
+                      >
+                        {t}
+                      </span>
                     ))}
                   </div>
                 )}
                 <p className="text-lg font-medium text-secondary">{coach.specialty}</p>
                 <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {coach.location}</span>
-                  <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-primary fill-primary" /> {coach.rating}</span>
-                  <span className="flex items-center gap-1"><Globe className="h-3.5 w-3.5" /> {coach.languages}</span>
+                  <span className="flex items-center gap-1">
+                    <MapPin className="h-3.5 w-3.5" /> {coach.location}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Star className="h-3.5 w-3.5 text-primary fill-primary" /> {coach.rating}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Globe className="h-3.5 w-3.5" /> {coach.languages}
+                  </span>
                 </div>
               </div>
               {coach.calendlyUrl ? (
-                <Button variant="hero" size="lg" onClick={() => document.getElementById("booking-section")?.scrollIntoView({ behavior: "smooth" })}>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  onClick={() => document.getElementById("booking-section")?.scrollIntoView({ behavior: "smooth" })}
+                >
                   Book a Yoga Class
                 </Button>
               ) : (
-                <Button variant="hero" size="lg" onClick={() => document.getElementById("request-form")?.scrollIntoView({ behavior: "smooth" })}>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  onClick={() => document.getElementById("request-form")?.scrollIntoView({ behavior: "smooth" })}
+                >
                   Request Booking
                 </Button>
               )}
@@ -171,7 +251,10 @@ const CoachProfile = () => {
                     <BadgeCheck className="h-4 w-4 text-secondary" />
                     <span className="text-sm font-semibold text-foreground">Verified Coach</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">This coach has been verified by Mooie Geest for their qualifications and expertise in perinatal wellness.</p>
+                  <p className="text-xs text-muted-foreground">
+                    This coach has been verified by Mooie Geest for their qualifications and expertise in perinatal
+                    wellness.
+                  </p>
                 </div>
               )}
 
@@ -179,7 +262,10 @@ const CoachProfile = () => {
                 <h2 className="text-xl font-semibold text-foreground mb-3">Classes</h2>
                 <div className="space-y-3">
                   {coach.classes.map((cls) => (
-                    <div key={cls.name} className="flex items-center justify-between p-4 rounded-lg bg-card shadow-soft">
+                    <div
+                      key={cls.name}
+                      className="flex items-center justify-between p-4 rounded-lg bg-card shadow-soft"
+                    >
                       <div className="flex items-center gap-3">
                         <Calendar className="h-5 w-5 text-primary" />
                         <span className="text-sm font-medium text-foreground">{cls.name}</span>
@@ -193,7 +279,9 @@ const CoachProfile = () => {
               {/* Calendly Booking Section */}
               {coach.calendlyUrl && (
                 <div id="booking-section" className="pt-4">
-                  <h2 className="text-xl font-semibold text-foreground mb-2">Book a Yoga Class with {coach.name.split(" ")[0]}</h2>
+                  <h2 className="text-xl font-semibold text-foreground mb-2">
+                    Book a Yoga Class with {coach.name.split(" ")[0]}
+                  </h2>
                   <p className="text-sm text-muted-foreground mb-4">Availability is shown in real time.</p>
                   <div
                     className="calendly-inline-widget rounded-xl overflow-hidden border border-border"
@@ -218,17 +306,43 @@ const CoachProfile = () => {
               {!coach.calendlyUrl && (
                 <div id="request-form" className="p-6 rounded-xl bg-card shadow-soft">
                   <h2 className="text-xl font-semibold text-foreground mb-1">Request a Session</h2>
-                  <p className="text-xs text-muted-foreground mb-4">Pilot phase — the coach will follow up to confirm scheduling and payment.</p>
+                  <p className="text-xs text-muted-foreground mb-4">
+                    Pilot phase — the coach will follow up to confirm scheduling and payment.
+                  </p>
                   {sessionRequested ? (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-4">
-                      <p className="text-sm font-medium text-secondary">Thank you — we've received your message and will get back to you shortly.</p>
+                      <p className="text-sm font-medium text-secondary">
+                        Thank you — we've received your message and will get back to you shortly.
+                      </p>
                     </motion.div>
                   ) : (
-                    <form onSubmit={(e) => { e.preventDefault(); setSessionRequested(true); }} className="space-y-3">
-                      <input type="text" placeholder="Your name" required className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                      <input type="email" placeholder="Your email" required className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                      <textarea placeholder="Message (optional)" rows={3} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
-                      <Button variant="secondary" className="w-full" type="submit">Send Request</Button>
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setSessionRequested(true);
+                      }}
+                      className="space-y-3"
+                    >
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        required
+                        className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      />
+                      <input
+                        type="email"
+                        placeholder="Your email"
+                        required
+                        className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      />
+                      <textarea
+                        placeholder="Message (optional)"
+                        rows={3}
+                        className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      />
+                      <Button variant="secondary" className="w-full" type="submit">
+                        Send Request
+                      </Button>
                     </form>
                   )}
                 </div>
