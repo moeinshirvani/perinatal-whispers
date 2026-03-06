@@ -60,7 +60,7 @@ const Chat = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const text = input.trim();
     if (!text) return;
 
@@ -69,26 +69,30 @@ const Chat = () => {
     setInput("");
     setIsTyping(true);
 
-    const distressKeywords = ["suicide", "kill myself", "end it", "can't go on", "want to die", "hopeless"];
-    const isDistress = distressKeywords.some((k) => text.toLowerCase().includes(k));
+    try {
+      const res = await fetch("http://159.223.9.0:5678/webhook/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
 
-    setTimeout(() => {
-      let aiContent: string;
-      if (isDistress) {
-        aiContent = safetyResponse;
-      } else if (intakeStep < intakeFlow.length) {
-        aiContent = intakeFlow[intakeStep];
-        setIntakeStep((s) => s + 1);
-      } else if (intakeStep === intakeFlow.length) {
-        aiContent = personalPlan;
-        setIntakeStep((s) => s + 1);
-      } else {
-        aiContent = "Thank you for sharing that with me. 💛 I want you to know that whatever you're feeling is completely valid. How are you feeling right now?";
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
       }
 
-      setMessages((prev) => [...prev, { id: (Date.now() + 1).toString(), role: "assistant", content: aiContent }]);
+      const data = await res.json();
+      setMessages((prev) => [
+        ...prev,
+        { id: (Date.now() + 1).toString(), role: "assistant", content: data.text },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { id: (Date.now() + 1).toString(), role: "assistant", content: "Sorry, something went wrong. Please try again." },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1200);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
