@@ -70,7 +70,7 @@ const Chat = () => {
     setIsTyping(true);
 
     try {
-      const res = await fetch("http://159.223.9.0:5678/webhook/chat", {
+      const res = await fetch("https://api.mooiegeest.com/webhook/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
