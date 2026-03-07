@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import B2B from "./pages/B2B";
 import Contact from "./pages/Contact";
 import Vision from "./pages/Vision";
+import Library from "./pages/Library";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
