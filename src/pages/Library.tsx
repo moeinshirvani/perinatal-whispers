@@ -182,7 +182,14 @@ const Library = () => {
 
       {/* Listing */}
       <section className="container px-4 pb-20">
-        {filtered.length === 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-16">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+            <span className="ml-2 text-muted-foreground">Loading articles…</span>
+          </div>
+        ) : error ? (
+          <p className="text-center text-muted-foreground py-12">{error}</p>
+        ) : filtered.length === 0 ? (
           <p className="text-center text-muted-foreground py-12">
             No articles found in this category yet.
           </p>
