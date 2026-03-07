@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { Star, Loader2 } from "lucide-react";
 
 interface Article {
   id: string;
@@ -28,81 +28,6 @@ const categories = [
   "Learning Resources",
 ];
 
-const sampleArticles: Article[] = [
-  {
-    id: "1",
-    title: "Understanding Your First Trimester: What to Expect",
-    summary: "A comprehensive guide to the physical and emotional changes during the first twelve weeks of pregnancy, with practical tips for self-care.",
-    source: "Mooie Geest Editorial",
-    publishedAt: "2025-03-01",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=600&h=400&fit=crop",
-    category: "Pregnancy",
-    tags: ["Pregnancy", "First Trimester"],
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Postpartum Recovery: Gentle Movement for New Mothers",
-    summary: "Safe, body-aware exercises designed to support your physical recovery and emotional wellbeing in the weeks after birth.",
-    source: "Mooie Geest Editorial",
-    publishedAt: "2025-02-20",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=400&fit=crop",
-    category: "Postpartum",
-    tags: ["Postpartum", "Recovery"],
-    featured: true,
-  },
-  {
-    id: "3",
-    title: "Managing Anxiety During Pregnancy",
-    summary: "Evidence-based strategies for coping with prenatal anxiety, including breath techniques, journaling, and when to seek professional help.",
-    source: "Perinatal Health Journal",
-    publishedAt: "2025-02-15",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
-    category: "Emotional Wellbeing",
-    tags: ["Emotional Wellbeing", "Anxiety"],
-    featured: false,
-  },
-  {
-    id: "4",
-    title: "Sleep Strategies for the Third Trimester",
-    summary: "Practical advice for improving sleep quality when comfort becomes a challenge, including positioning tips and relaxation routines.",
-    source: "Mooie Geest Editorial",
-    publishedAt: "2025-02-10",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=600&h=400&fit=crop",
-    category: "Sleep",
-    tags: ["Sleep", "Pregnancy"],
-    featured: false,
-  },
-  {
-    id: "5",
-    title: "Building Your Support Network Before Baby Arrives",
-    summary: "How to identify, nurture, and lean on your community during pregnancy and early motherhood for lasting emotional resilience.",
-    source: "Maternal Wellbeing Institute",
-    publishedAt: "2025-01-28",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&h=400&fit=crop",
-    category: "Learning Resources",
-    tags: ["Learning Resources", "Community"],
-    featured: false,
-  },
-  {
-    id: "6",
-    title: "Breathwork for Labour Preparation",
-    summary: "Simple, effective breathing exercises that can help you feel more calm and prepared as your due date approaches.",
-    source: "Mooie Geest Editorial",
-    publishedAt: "2025-01-20",
-    url: "#",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop",
-    category: "Pregnancy",
-    tags: ["Pregnancy", "Breathwork"],
-    featured: false,
-  },
-];
-
 const formatDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -113,22 +38,26 @@ const formatDate = (dateStr: string) => {
 
 const ArticleCard = ({ article }: { article: Article }) => (
   <Card className="overflow-hidden hover:shadow-md transition-shadow border-border/50 bg-card">
-    <div className="aspect-[3/2] overflow-hidden">
-      <img
-        src={article.image}
-        alt={article.title}
-        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        loading="lazy"
-      />
-    </div>
-    <CardContent className="p-5 space-y-3">
-      <div className="flex flex-wrap gap-1.5">
-        {article.tags.map((tag) => (
-          <Badge key={tag} variant="secondary" className="text-xs font-normal">
-            {tag}
-          </Badge>
-        ))}
+    {article.image && (
+      <div className="aspect-[3/2] overflow-hidden">
+        <img
+          src={article.image}
+          alt={article.title}
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          loading="lazy"
+        />
       </div>
+    )}
+    <CardContent className="p-5 space-y-3">
+      {article.tags && article.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {article.tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="text-xs font-normal">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      )}
       <h3 className="text-lg font-semibold text-foreground leading-snug">
         {article.title}
       </h3>
@@ -137,31 +66,68 @@ const ArticleCard = ({ article }: { article: Article }) => (
       </p>
       <div className="flex items-center justify-between pt-1">
         <span className="text-xs text-muted-foreground">
-          {article.source} · {formatDate(article.publishedAt)}
+          {article.source}{article.publishedAt ? ` · ${formatDate(article.publishedAt)}` : ""}
         </span>
       </div>
-      <a
-        href={article.url}
-        className="inline-block text-sm font-medium text-primary hover:underline"
-      >
-        Read more →
-      </a>
+      {article.url && article.url !== "#" && (
+        <a
+          href={article.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm font-medium text-primary hover:underline"
+        >
+          Read more →
+        </a>
+      )}
     </CardContent>
   </Card>
 );
 
 const Library = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const res = await fetch("https://api.mooiegeest.com/webhook/care-library-feed");
+        if (!res.ok) throw new Error("Failed to load articles");
+        const data = await res.json();
+        const items: Article[] = (Array.isArray(data) ? data : []).map((item: any, index: number) => ({
+          id: item.id || String(index),
+          title: item.title || "",
+          summary: item.summary || "",
+          source: item.source || "",
+          publishedAt: item.publishedAt || "",
+          url: item.url || "#",
+          image: item.image || "",
+          category: item.category || "",
+          tags: item.tags || [],
+          featured: item.featured || false,
+        }));
+        setArticles(items);
+      } catch {
+        setError("We couldn't load the articles right now. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []);
 
   const featured = useMemo(
-    () => sampleArticles.filter((a) => a.featured),
-    []
+    () => articles.filter((a) => a.featured),
+    [articles]
   );
 
   const filtered = useMemo(() => {
-    if (activeCategory === "All") return sampleArticles;
-    return sampleArticles.filter((a) => a.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === "All") return articles;
+    return articles.filter((a) => a.category === activeCategory);
+  }, [activeCategory, articles]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -216,7 +182,14 @@ const Library = () => {
 
       {/* Listing */}
       <section className="container px-4 pb-20">
-        {filtered.length === 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-16">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+            <span className="ml-2 text-muted-foreground">Loading articles…</span>
+          </div>
+        ) : error ? (
+          <p className="text-center text-muted-foreground py-12">{error}</p>
+        ) : filtered.length === 0 ? (
           <p className="text-center text-muted-foreground py-12">
             No articles found in this category yet.
           </p>
