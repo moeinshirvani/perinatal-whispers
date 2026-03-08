@@ -184,7 +184,7 @@ const Library = () => {
               <ArticleCard
                 key={article.id}
                 article={article}
-                onSelect={setSelectedArticle}
+                onClick={handleArticleClick}
               />
             ))}
           </div>
