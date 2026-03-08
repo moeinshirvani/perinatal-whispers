@@ -203,6 +203,9 @@ const Library = () => {
 
   const filtered = useMemo(() => {
     if (activeCategory === "All") return articles;
+    if (activeCategory === "learning") {
+      return articles.filter((a) => a.category === "learning" || a.category === "resources");
+    }
     return articles.filter((a) => a.category === activeCategory);
   }, [activeCategory, articles]);
 
