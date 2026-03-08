@@ -16,7 +16,7 @@ interface Article {
   source_url: string;
   image_url: string;
   category: string;
-  tags: string[];
+  tags: string[] | string;
   slug: string;
   published_at: string;
   featured?: boolean;
