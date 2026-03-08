@@ -185,6 +185,7 @@ const Library = () => {
           .order("published_at", { ascending: false });
 
         if (dbError) throw dbError;
+        console.log("Care Library fetched articles:", data);
         setArticles((data as Article[]) || []);
       } catch {
         setError("We couldn't load the articles right now. Please try again later.");
