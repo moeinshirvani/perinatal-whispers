@@ -18,6 +18,7 @@ import B2B from "./pages/B2B";
 import Contact from "./pages/Contact";
 import Vision from "./pages/Vision";
 import Library from "./pages/Library";
+import ArticleDetail from "./pages/ArticleDetail";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/library" element={<Library />} />
+          <Route path="/care-library/:slug" element={<ArticleDetail />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />

@@ -1,10 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Star, Loader2, X } from "lucide-react";
+import { Star, Loader2 } from "lucide-react";
 
 
 interface Article {
@@ -41,14 +42,14 @@ const formatDate = (dateStr: string) => {
 
 const ArticleCard = ({
   article,
-  onSelect,
+  onClick,
 }: {
   article: Article;
-  onSelect: (article: Article) => void;
+  onClick: (slug: string) => void;
 }) => (
   <Card
     className="overflow-hidden hover:shadow-md transition-shadow border-border/50 bg-card cursor-pointer"
-    onClick={() => onSelect(article)}
+    onClick={() => onClick(article.slug)}
   >
     <div className="aspect-[3/2] overflow-hidden bg-muted">
       {article.image_url ? (
@@ -104,73 +105,17 @@ const ArticleCard = ({
   </Card>
 );
 
-const ArticleDetail = ({
-  article,
-  onClose,
-}: {
-  article: Article;
-  onClose: () => void;
-}) => (
-  <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-start justify-center overflow-y-auto pt-20 pb-10 px-4">
-    <div className="bg-card border border-border rounded-xl shadow-lg max-w-2xl w-full relative">
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 p-1 rounded-full hover:bg-muted transition-colors"
-      >
-        <X className="h-5 w-5 text-muted-foreground" />
-      </button>
-      {article.image_url && (
-        <img
-          src={article.image_url}
-          alt={article.title}
-          className="w-full aspect-[2/1] object-cover rounded-t-xl"
-        />
-      )}
-      <div className="p-6 md:p-8 space-y-4">
-        {article.tags && (
-          <div className="flex flex-wrap gap-1.5">
-            {(Array.isArray(article.tags) ? article.tags : article.tags.split(",").map((t: string) => t.trim()).filter(Boolean)).map((tag: string) => (
-              <Badge key={tag} variant="secondary" className="text-xs font-normal">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-        <h2 className="text-2xl font-semibold text-foreground">{article.title}</h2>
-        <p className="text-sm text-muted-foreground">
-          {article.published_at && formatDate(article.published_at)}
-        </p>
-        <div className="text-foreground leading-relaxed whitespace-pre-line">
-          {article.content || article.summary}
-        </div>
-        {article.source_name && (
-          <p className="text-sm text-muted-foreground pt-2">
-            Source:{" "}
-            {article.source_url ? (
-              <a
-                href={article.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                {article.source_name}
-              </a>
-            ) : (
-              article.source_name
-            )}
-          </p>
-        )}
-      </div>
-    </div>
-  </div>
-);
 
 const Library = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState("All");
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+
+  const handleArticleClick = (slug: string) => {
+    navigate(`/care-library/${slug}`);
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -239,7 +184,7 @@ const Library = () => {
               <ArticleCard
                 key={article.id}
                 article={article}
-                onSelect={setSelectedArticle}
+                onClick={handleArticleClick}
               />
             ))}
           </div>
@@ -282,20 +227,13 @@ const Library = () => {
               <ArticleCard
                 key={article.id}
                 article={article}
-                onSelect={setSelectedArticle}
+                onClick={handleArticleClick}
               />
             ))}
           </div>
         )}
       </section>
 
-      {/* Detail overlay */}
-      {selectedArticle && (
-        <ArticleDetail
-          article={selectedArticle}
-          onClose={() => setSelectedArticle(null)}
-        />
-      )}
 
       <Footer />
     </div>
