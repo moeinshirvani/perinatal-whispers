@@ -234,13 +234,6 @@ const Library = () => {
         )}
       </section>
 
-      {/* Detail overlay */}
-      {selectedArticle && (
-        <ArticleDetail
-          article={selectedArticle}
-          onClose={() => setSelectedArticle(null)}
-        />
-      )}
 
       <Footer />
     </div>
