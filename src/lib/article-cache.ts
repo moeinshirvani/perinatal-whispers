@@ -1,4 +1,4 @@
-const FEED_URL = "https://api.mooiegeest.com/webhook/care-library-feed";
+import { supabase } from "./supabase";
 
 export interface Article {
   id: string;
@@ -23,15 +23,14 @@ export async function fetchArticles(): Promise<Article[]> {
   if (fetchPromise) return fetchPromise;
 
   fetchPromise = (async () => {
-    const res = await fetch(FEED_URL);
-    if (!res.ok) throw new Error("Failed to load articles");
-    const data = await res.json();
-    console.log("Care Library raw response", data);
+    const { data, error } = await supabase
+      .from("care_library_items")
+      .select("*")
+      .order("published_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+    console.log("Care Library raw Supabase rows", data);
     const items: Article[] = Array.isArray(data) ? data : [];
-    items.sort(
-      (a, b) =>
-        new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-    );
     cachedArticles = items;
     fetchPromise = null;
     return items;
