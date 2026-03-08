@@ -4,33 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, ArrowLeft } from "lucide-react";
-
-interface Article {
-  id: string;
-  title: string;
-  summary: string;
-  content: string;
-  source_name: string;
-  source_url: string;
-  image_url: string;
-  category: string;
-  tags: string[] | string;
-  slug: string;
-  published_at: string;
-}
-
-const formatDate = (dateStr: string) =>
-  new Date(dateStr).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-const parseTags = (tags: string[] | string): string[] => {
-  if (!tags) return [];
-  if (Array.isArray(tags)) return tags;
-  return tags.split(",").map((t) => t.trim()).filter(Boolean);
-};
+import { fetchArticles, formatArticleDate, parseTags, type Article } from "@/lib/article-cache";
 
 const ArticleDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -39,14 +13,13 @@ const ArticleDetailPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchArticle = async () => {
+    let cancelled = false;
+    (async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const res = await fetch("https://api.mooiegeest.com/webhook/care-library-feed");
-        if (!res.ok) throw new Error("Failed to load articles");
-        const data = await res.json();
-        const items: Article[] = Array.isArray(data) ? data : [];
+        const items = await fetchArticles();
+        if (cancelled) return;
         const found = items.find((a) => a.slug === slug);
         if (!found) {
           setError("Article not found.");
@@ -54,13 +27,15 @@ const ArticleDetailPage = () => {
           setArticle(found);
         }
       } catch {
-        setError("We couldn't load this article right now. Please try again later.");
+        if (!cancelled) setError("We couldn't load this article right now. Please try again later.");
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
-    };
-    fetchArticle();
+    })();
+    return () => { cancelled = true; };
   }, [slug]);
+
+  const dateStr = article ? formatArticleDate(article.published_at) : null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -84,6 +59,23 @@ const ArticleDetailPage = () => {
           <p className="text-center text-muted-foreground py-12">{error}</p>
         ) : article ? (
           <article className="space-y-6">
+            {/* Title */}
+            <h1 className="text-2xl md:text-3xl font-semibold text-foreground leading-tight">
+              {article.title}
+            </h1>
+
+            {/* Meta */}
+            <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              {article.source_name && <span>{article.source_name}</span>}
+              {article.source_name && dateStr && <span>•</span>}
+              {dateStr && <span>{dateStr}</span>}
+              {article.category && (
+                <Badge variant="outline" className="text-xs font-normal capitalize ml-1">
+                  {article.category.replace("-", " ")}
+                </Badge>
+              )}
+            </div>
+
             {/* Hero image */}
             <div className="aspect-[2/1] overflow-hidden rounded-xl bg-muted">
               {article.image_url ? (
@@ -93,18 +85,8 @@ const ArticleDetailPage = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-muted-foreground/40">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="64"
-                    height="64"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+                <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                     <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
                     <circle cx="9" cy="9" r="2" />
                     <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
@@ -123,21 +105,6 @@ const ArticleDetailPage = () => {
                 ))}
               </div>
             )}
-
-            {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-semibold text-foreground leading-tight">
-              {article.title}
-            </h1>
-
-            {/* Meta */}
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              {article.published_at && <span>{formatDate(article.published_at)}</span>}
-              {article.category && (
-                <Badge variant="outline" className="text-xs font-normal capitalize">
-                  {article.category.replace("-", " ")}
-                </Badge>
-              )}
-            </div>
 
             {/* Content */}
             <div className="text-foreground leading-relaxed whitespace-pre-line text-base">

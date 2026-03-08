@@ -6,22 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, Loader2 } from "lucide-react";
+import { fetchArticles, formatArticleDate, parseTags, type Article } from "@/lib/article-cache";
 
-
-interface Article {
-  id: string;
-  title: string;
-  summary: string;
-  content: string;
-  source_name: string;
-  source_url: string;
-  image_url: string;
-  category: string;
-  tags: string[] | string;
-  slug: string;
-  published_at: string;
-  featured?: boolean;
-}
+const ITEMS_PER_PAGE = 12;
 
 const categories: { label: string; value: string }[] = [
   { label: "All", value: "All" },
@@ -32,79 +19,63 @@ const categories: { label: string; value: string }[] = [
   { label: "Learning Resources", value: "learning" },
 ];
 
-const formatDate = (dateStr: string) => {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
-
 const ArticleCard = ({
   article,
   onClick,
 }: {
   article: Article;
   onClick: (slug: string) => void;
-}) => (
-  <Card
-    className="overflow-hidden hover:shadow-md transition-shadow border-border/50 bg-card cursor-pointer"
-    onClick={() => onClick(article.slug)}
-  >
-    <div className="aspect-[3/2] overflow-hidden bg-muted">
-      {article.image_url ? (
-        <img
-          src={article.image_url}
-          alt={article.title}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center text-muted-foreground/40">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-            <circle cx="9" cy="9" r="2" />
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-          </svg>
-        </div>
-      )}
-    </div>
-    <CardContent className="p-5 space-y-3">
-      {article.tags && (
-        <div className="flex flex-wrap gap-1.5">
-          {(Array.isArray(article.tags) ? article.tags : article.tags.split(",").map((t: string) => t.trim()).filter(Boolean)).map((tag: string) => (
-            <Badge key={tag} variant="secondary" className="text-xs font-normal">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      )}
-      <h3 className="text-lg font-semibold text-foreground leading-snug">
-        {article.title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-        {article.summary}
-      </p>
-      <div className="flex items-center justify-between pt-1">
-        <span className="text-xs text-muted-foreground">
-          {article.source_name}
-          {article.published_at ? ` · ${formatDate(article.published_at)}` : ""}
-        </span>
+}) => {
+  const dateStr = formatArticleDate(article.published_at);
+  return (
+    <Card
+      className="overflow-hidden hover:shadow-md transition-shadow border-border/50 bg-card cursor-pointer"
+      onClick={() => onClick(article.slug)}
+    >
+      <div className="aspect-[3/2] overflow-hidden bg-muted">
+        {article.image_url ? (
+          <img
+            src={article.image_url}
+            alt={article.title}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground/30">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+              <circle cx="9" cy="9" r="2" />
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+            </svg>
+          </div>
+        )}
       </div>
-    </CardContent>
-  </Card>
-);
-
+      <CardContent className="p-5 space-y-3">
+        {article.tags && (
+          <div className="flex flex-wrap gap-1.5">
+            {parseTags(article.tags).map((tag: string) => (
+              <Badge key={tag} variant="secondary" className="text-xs font-normal">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+        <h3 className="text-lg font-semibold text-foreground leading-snug">
+          {article.title}
+        </h3>
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+          {article.summary}
+        </p>
+        <div className="flex items-center justify-between pt-1">
+          <span className="text-xs text-muted-foreground">
+            {article.source_name}
+            {dateStr ? ` · ${dateStr}` : ""}
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Library = () => {
   const navigate = useNavigate();
@@ -112,34 +83,36 @@ const Library = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   const handleArticleClick = (slug: string) => {
     navigate(`/care-library/${slug}`);
   };
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    let cancelled = false;
+    (async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const res = await fetch("https://api.mooiegeest.com/webhook/care-library-feed");
-        if (!res.ok) throw new Error("Failed to load articles");
-        const data = await res.json();
-        console.log("Care Library raw response", data);
-        const items: Article[] = Array.isArray(data) ? data : [];
-        items.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
-        setArticles(items);
+        const items = await fetchArticles();
+        if (!cancelled) setArticles(items);
       } catch {
-        setError("We couldn't load the articles right now. Please try again later.");
+        if (!cancelled) setError("We couldn't load the articles right now. Please try again later.");
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
-    };
-    fetchArticles();
+    })();
+    return () => { cancelled = true; };
   }, []);
 
+  // Reset pagination when category changes
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [activeCategory]);
+
   const featured = useMemo(
-    () => articles.filter((a) => (a as any).featured),
+    () => articles.filter((a) => a.featured),
     [articles]
   );
 
@@ -152,6 +125,9 @@ const Library = () => {
   }, [activeCategory, articles]);
 
   console.log("Care Library visible articles", filtered);
+
+  const paginatedArticles = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
 
   return (
     <div className="min-h-screen bg-background">
@@ -222,18 +198,29 @@ const Library = () => {
             No articles found in this category yet.
           </p>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((article) => (
-              <ArticleCard
-                key={article.id}
-                article={article}
-                onClick={handleArticleClick}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {paginatedArticles.map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  onClick={handleArticleClick}
+                />
+              ))}
+            </div>
+            {hasMore && (
+              <div className="flex justify-center mt-10">
+                <Button
+                  variant="outline"
+                  onClick={() => setVisibleCount((c) => c + ITEMS_PER_PAGE)}
+                >
+                  Load more articles
+                </Button>
+              </div>
+            )}
+          </>
         )}
       </section>
-
 
       <Footer />
     </div>
