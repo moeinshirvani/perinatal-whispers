@@ -16,7 +16,7 @@ interface Article {
   source_url: string;
   image_url: string;
   category: string;
-  tags: string[];
+  tags: string[] | string;
   slug: string;
   published_at: string;
   featured?: boolean;
@@ -28,7 +28,7 @@ const categories: { label: string; value: string }[] = [
   { label: "Postpartum", value: "postpartum" },
   { label: "Emotional Wellbeing", value: "emotional-wellbeing" },
   { label: "Sleep", value: "sleep" },
-  { label: "Learning Resources", value: "resources" },
+  { label: "Learning Resources", value: "learning" },
 ];
 
 const formatDate = (dateStr: string) => {
@@ -79,9 +79,9 @@ const ArticleCard = ({
       )}
     </div>
     <CardContent className="p-5 space-y-3">
-      {article.tags && article.tags.length > 0 && (
+      {article.tags && (
         <div className="flex flex-wrap gap-1.5">
-          {article.tags.map((tag) => (
+          {(Array.isArray(article.tags) ? article.tags : article.tags.split(",").map((t: string) => t.trim()).filter(Boolean)).map((tag: string) => (
             <Badge key={tag} variant="secondary" className="text-xs font-normal">
               {tag}
             </Badge>
@@ -127,9 +127,9 @@ const ArticleDetail = ({
         />
       )}
       <div className="p-6 md:p-8 space-y-4">
-        {article.tags && article.tags.length > 0 && (
+        {article.tags && (
           <div className="flex flex-wrap gap-1.5">
-            {article.tags.map((tag) => (
+            {(Array.isArray(article.tags) ? article.tags : article.tags.split(",").map((t: string) => t.trim()).filter(Boolean)).map((tag: string) => (
               <Badge key={tag} variant="secondary" className="text-xs font-normal">
                 {tag}
               </Badge>
@@ -185,6 +185,7 @@ const Library = () => {
           .order("published_at", { ascending: false });
 
         if (dbError) throw dbError;
+        console.log("Care Library fetched articles:", data);
         setArticles((data as Article[]) || []);
       } catch {
         setError("We couldn't load the articles right now. Please try again later.");
@@ -202,6 +203,9 @@ const Library = () => {
 
   const filtered = useMemo(() => {
     if (activeCategory === "All") return articles;
+    if (activeCategory === "learning") {
+      return articles.filter((a) => a.category === "learning" || a.category === "resources");
+    }
     return articles.filter((a) => a.category === activeCategory);
   }, [activeCategory, articles]);
 
