@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, Loader2, X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+
 
 interface Article {
   id: string;
