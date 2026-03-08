@@ -127,9 +127,9 @@ const ArticleDetail = ({
         />
       )}
       <div className="p-6 md:p-8 space-y-4">
-        {article.tags && article.tags.length > 0 && (
+        {article.tags && (
           <div className="flex flex-wrap gap-1.5">
-            {article.tags.map((tag) => (
+            {(Array.isArray(article.tags) ? article.tags : article.tags.split(",").map((t: string) => t.trim()).filter(Boolean)).map((tag: string) => (
               <Badge key={tag} variant="secondary" className="text-xs font-normal">
                 {tag}
               </Badge>
