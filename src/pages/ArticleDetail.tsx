@@ -24,6 +24,8 @@ const ArticleDetailPage = () => {
         if (!found) {
           setError("Article not found.");
         } else {
+          console.log("ArticleDetail found article:", found);
+          console.log("ArticleDetail content length:", found.content?.length ?? 0);
           setArticle(found);
         }
       } catch {
