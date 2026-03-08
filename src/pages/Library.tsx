@@ -206,6 +206,8 @@ const Library = () => {
     return articles.filter((a) => a.category === activeCategory);
   }, [activeCategory, articles]);
 
+  console.log("Care Library visible articles", filtered);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
