@@ -177,16 +177,13 @@ const Library = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const { data, error: dbError } = await supabase
-          .from("care_library_items")
-          .select(
-            "id,title,summary,content,source_name,source_url,image_url,category,tags,slug,published_at"
-          )
-          .order("published_at", { ascending: false });
-
-        if (dbError) throw dbError;
-        console.log("Care Library fetched articles:", data);
-        setArticles((data as Article[]) || []);
+        const res = await fetch("https://api.mooiegeest.com/webhook/care-library-feed");
+        if (!res.ok) throw new Error("Failed to load articles");
+        const data = await res.json();
+        console.log("Care Library raw response", data);
+        const items: Article[] = Array.isArray(data) ? data : [];
+        items.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+        setArticles(items);
       } catch {
         setError("We couldn't load the articles right now. Please try again later.");
       } finally {
