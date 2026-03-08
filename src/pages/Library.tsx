@@ -107,11 +107,15 @@ const ArticleCard = ({
 
 
 const Library = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState("All");
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+
+  const handleArticleClick = (slug: string) => {
+    navigate(`/care-library/${slug}`);
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
