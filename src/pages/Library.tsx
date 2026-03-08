@@ -42,14 +42,14 @@ const formatDate = (dateStr: string) => {
 
 const ArticleCard = ({
   article,
-  onSelect,
+  onClick,
 }: {
   article: Article;
-  onSelect: (article: Article) => void;
+  onClick: (slug: string) => void;
 }) => (
   <Card
     className="overflow-hidden hover:shadow-md transition-shadow border-border/50 bg-card cursor-pointer"
-    onClick={() => onSelect(article)}
+    onClick={() => onClick(article.slug)}
   >
     <div className="aspect-[3/2] overflow-hidden bg-muted">
       {article.image_url ? (
