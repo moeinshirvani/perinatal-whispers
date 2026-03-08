@@ -28,7 +28,7 @@ const categories: { label: string; value: string }[] = [
   { label: "Postpartum", value: "postpartum" },
   { label: "Emotional Wellbeing", value: "emotional-wellbeing" },
   { label: "Sleep", value: "sleep" },
-  { label: "Learning Resources", value: "resources" },
+  { label: "Learning Resources", value: "learning" },
 ];
 
 const formatDate = (dateStr: string) => {
