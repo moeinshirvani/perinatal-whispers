@@ -107,9 +107,11 @@ const ArticleDetailPage = () => {
             )}
 
             {/* Content */}
-            <div className="text-foreground leading-relaxed whitespace-pre-line text-base">
-              {article.content || article.summary}
-            </div>
+            {(article.content || article.summary) && (
+              <div className="prose max-w-none mt-6">
+                <div dangerouslySetInnerHTML={{ __html: article.content || article.summary }} />
+              </div>
+            )}
 
             {/* Source */}
             {article.source_name && (
