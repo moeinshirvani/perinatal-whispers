@@ -16,7 +16,7 @@ const desktopLinks = [
 const mobileLinks = [
   { label: "Home", to: "/" },
   { label: "Coaches", to: "/coaches" },
-  { label: "Care Library", to: "/library" },
+  { label: "Care Library", to: "https://api.mooiegeest.com/library/" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
   { label: "How it Works", to: "/how-it-works" },
