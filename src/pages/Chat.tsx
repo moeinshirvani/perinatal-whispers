@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Leaf, ArrowLeft, AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -20,44 +20,25 @@ const initialMessages: Message[] = [
   },
 ];
 
-const intakeFlow = [
-  "Which trimester are you in, or how many months postpartum?",
-  "How would you describe your mood today? (You can say anything that feels right.)",
-  "How has your sleep been lately? (Great / Okay / Struggling)",
-  "What's your biggest concern right now? (anxiety, fatigue, loneliness, physical discomfort, or something else)",
-];
-
-const personalPlan = `Thank you for sharing all of that with me. 💛 Based on your answers, here's your personal wellness suggestion:
-
-**Your Daily Blueprint:**
-• 🧘 10-min prenatal breathwork (morning)
-• 🎵 Sleep relaxation audio (evening)
-• 📝 Quick mood check-in
-
-**Recommended for you:**
-• [Prenatal & Postnatal Yoga with Mahboobeh](/coaches/mahboobeh-habibi) — book a live class
-• [Breathwork Basics with Lisa](/coaches/lisa-jansen) — guided series
-• [Mindful Pregnancy with Sofie](/coaches/sofie-de-vries) — meditation sessions
-
-You can come back here anytime to chat. I'll learn from our conversations and adapt your plan as you progress. 🌱`;
-
-const safetyResponse = `I hear you, and I want you to know that your feelings are completely valid. 💛
-
-**If you're in crisis or need immediate support:**
-• 📞 113 Zelfmoordpreventie: 0900-0113 (24/7)
-• 📞 Huisarts (GP): contact your local doctor
-• 🌐 www.113.nl — online chat available
-
-You are not alone. Please reach out to a professional who can support you right now. I'm always here for you when you're ready to talk again. 🌿`;
+const getOrCreateAnonymousId = () => {
+  const storedId = localStorage.getItem("mg_anonymous_session_id");
+  if (storedId) return storedId;
+  const newId = crypto.randomUUID();
+  localStorage.setItem("mg_anonymous_session_id", newId);
+  return newId;
+};
 
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [intakeStep, setIntakeStep] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
-  const anonymousId = useMemo(() => crypto.randomUUID(), []);
+  const [anonymousId, setAnonymousId] = useState<string>("");
+
+  useEffect(() => {
+    setAnonymousId(getOrCreateAnonymousId());
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -78,8 +59,8 @@ const Chat = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: text,
-          user_id: user?.id ?? anonymousId,
-          user_email: user?.email ?? null,
+          session_id: user?.id ?? anonymousId,
+          email: user?.email ?? null,
         }),
       });
 
