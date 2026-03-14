@@ -76,7 +76,11 @@ const Chat = () => {
       const res = await fetch("https://api.mooiegeest.com/webhook/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+          user_id: user?.id ?? anonymousId,
+          user_email: user?.email ?? null,
+        }),
       });
 
       if (!res.ok) {

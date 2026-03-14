@@ -66,9 +66,23 @@ const Navbar = () => {
           <Button variant="hero-outline" size="sm" asChild>
             <Link to="/coach-onboarding">Join as a Verified Coach</Link>
           </Button>
-          <Button variant="hero" size="sm" asChild>
-            <Link to="/chat">Get Started</Link>
-          </Button>
+          {user ? (
+            <>
+              <span className="text-xs text-muted-foreground truncate max-w-[120px]">{user.email}</span>
+              <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-1" /> Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/auth">Log in</Link>
+              </Button>
+              <Button variant="hero" size="sm" asChild>
+                <Link to="/chat">Get Started</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile toggle */}
