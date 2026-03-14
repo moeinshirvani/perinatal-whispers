@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { useAuth } from "@/contexts/AuthContext";
 
 const desktopLinks = [
   { label: "Home", to: "/" },
