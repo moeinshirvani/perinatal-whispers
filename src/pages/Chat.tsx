@@ -83,7 +83,7 @@ const Chat = () => {
       const data = await res.json();
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), role: "assistant", content: data.text },
+        { id: (Date.now() + 1).toString(), role: "assistant", content: data.response },
       ]);
     } catch {
       setMessages((prev) => [
