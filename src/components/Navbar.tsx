@@ -8,7 +8,7 @@ import logo from "@/assets/logo.png";
 const desktopLinks = [
   { label: "Home", to: "/" },
   { label: "Coaches", to: "/coaches" },
-  { label: "Care Library", to: "/library" },
+  { label: "Care Library", to: "https://api.mooiegeest.com/library/" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
