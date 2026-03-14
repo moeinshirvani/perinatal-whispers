@@ -56,6 +56,8 @@ const Chat = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [intakeStep, setIntakeStep] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuth();
+  const anonymousId = useMemo(() => crypto.randomUUID(), []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
