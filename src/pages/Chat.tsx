@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Leaf, ArrowLeft, AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface Message {
   id: string;
@@ -55,6 +56,8 @@ const Chat = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [intakeStep, setIntakeStep] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuth();
+  const anonymousId = useMemo(() => crypto.randomUUID(), []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,7 +76,11 @@ const Chat = () => {
       const res = await fetch("https://api.mooiegeest.com/webhook/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+          user_id: user?.id ?? anonymousId,
+          user_email: user?.email ?? null,
+        }),
       });
 
       if (!res.ok) {

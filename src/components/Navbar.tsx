@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { useAuth } from "@/contexts/AuthContext";
 
 const desktopLinks = [
   { label: "Home", to: "/" },
@@ -30,6 +31,13 @@ const mobileLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -58,9 +66,23 @@ const Navbar = () => {
           <Button variant="hero-outline" size="sm" asChild>
             <Link to="/coach-onboarding">Join as a Verified Coach</Link>
           </Button>
-          <Button variant="hero" size="sm" asChild>
-            <Link to="/chat">Get Started</Link>
-          </Button>
+          {user ? (
+            <>
+              <span className="text-xs text-muted-foreground truncate max-w-[120px]">{user.email}</span>
+              <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-1" /> Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/auth">Log in</Link>
+              </Button>
+              <Button variant="hero" size="sm" asChild>
+                <Link to="/chat">Get Started</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile toggle */}
