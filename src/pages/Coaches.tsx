@@ -19,7 +19,7 @@ const coaches = [
   {
     id: 0, slug: "mahboobeh-habibi", name: "Mahboobeh Habibi", specialty: "Prenatal & Postnatal Yoga", category: "Yoga",
     location: "Leiderdorp", language: "EN, NL", rating: 5.0, verified: true,
-    bio: "Prenatal and postnatal yoga teacher with 7+ years of holistic wellness experience. E-RYT 500 certified, Reiki Master, and meditation instructor.",
+    bio: "Prenatal and postnatal yoga teacher with 7+ years of holistic wellness experience. E-RYT 200 certified, Reiki Master, and meditation instructor.",
     image: mahboobehImg, cta: "Book a Yoga Class",
   },
   {
@@ -80,10 +80,10 @@ const Coaches = () => {
         <div className="container px-4 md:px-8">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-3">
-              Meet Our Coaches
+              Coaches
             </h1>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Certified wellness professionals specialized in perinatal care.
+              Extra support when you want it — from caring, verified wellness professionals.
             </p>
           </motion.div>
 

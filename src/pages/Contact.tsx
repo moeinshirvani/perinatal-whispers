@@ -37,7 +37,7 @@ const Contact = () => {
                   <p className="text-xs">VAT: NL005202551B81</p>
                   <div className="flex items-center gap-2">
                     <Mail className="h-3.5 w-3.5 text-accent" />
-                    <a href="mailto:hello@mooiegeest.com" className="text-primary hover:underline">hello@mooiegeest.com</a>
+                    <a href="mailto:m.habibi6869@gmail.com" className="text-primary hover:underline">m.habibi6869@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@ const Contact = () => {
                 </motion.div>
               ) : (
                 <div className="p-6 rounded-xl bg-card shadow-soft">
-                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4" action="https://formsubmit.co/moeinshirvani90@gmail.com" method="POST">
+                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4" action="https://formsubmit.co/m.habibi6869@gmail.com" method="POST">
                     <div>
                       <label className="text-sm font-medium text-foreground">Name</label>
                       <input type="text" required className="w-full mt-1 px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
@@ -83,6 +83,7 @@ const Contact = () => {
                       <textarea required rows={4} className="w-full mt-1 px-4 py-2.5 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
                     </div>
                     <Button type="submit" variant="hero" className="w-full">Send Message</Button>
+                    <p className="text-xs text-muted-foreground text-center mt-2">We usually reply within 24 hours.</p>
                   </form>
                 </div>
               )}

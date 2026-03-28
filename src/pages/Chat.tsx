@@ -16,7 +16,7 @@ const initialMessages: Message[] = [
     id: "1",
     role: "assistant",
     content:
-      "Welcome to Mooie Geest 🌿 I'm here to support you through your pregnancy and postpartum journey. Let's start with a few gentle questions so I can personalize your experience.\n\nAre you currently pregnant or in your postpartum period?",
+      "Welcome to Mooie Geest 🌿\nI'm here to support you through pregnancy and postpartum.\nWe'll start with one gentle question so I can personalize support.\n\nAre you currently pregnant or in your postpartum period?",
   },
 ];
 
@@ -137,6 +137,19 @@ const Chat = () => {
                 <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "0ms" }} />
                 <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
                 <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+              </div>
+            </div>
+          </motion.div>
+        )}
+        {!user && messages.length >= 3 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
+            <div className="bg-primary/5 border border-primary/10 rounded-xl px-5 py-4 max-w-[85%] md:max-w-[70%] text-center space-y-2">
+              <p className="text-sm text-muted-foreground">Want me to remember your profile and support you over time?</p>
+              <div className="flex gap-2 justify-center">
+                <Button variant="hero" size="sm" asChild>
+                  <Link to="/auth">Create free account</Link>
+                </Button>
+                <Button variant="ghost" size="sm" className="text-muted-foreground">Continue for now</Button>
               </div>
             </div>
           </motion.div>

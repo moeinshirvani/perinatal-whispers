@@ -1,33 +1,33 @@
 import { motion } from "framer-motion";
-import { Smartphone, MessageCircle, BarChart3, Calendar, CreditCard } from "lucide-react";
+import { MessageCircle, HelpCircle, Heart, BookOpen, Users } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const steps = [
-  {
-    icon: Smartphone,
-    title: "Instant PWA Access",
-    description: "No app store downloads needed. Simply add Mooie Geest to your home screen from your browser for instant, native-app-like access.",
-  },
+const sections = [
   {
     icon: MessageCircle,
-    title: "AI-Powered Onboarding",
-    description: "A friendly 10-question chat learns your pregnancy stage, mood, sleep patterns, and concerns — generating your personal Wellness Profile in under 2 minutes.",
+    title: "Start a conversation",
+    description: "Talk about what's on your mind: stress, sleep, emotions, or daily challenges.",
   },
   {
-    icon: BarChart3,
-    title: "Daily Check-ins & Dashboard",
-    description: "Track your mood, sleep quality, and stress signals daily. See clear real-time trends over 7, 14, and 30 days so you always know how you're doing.",
+    icon: HelpCircle,
+    title: "Personalize with a few questions",
+    description: "We'll ask short questions about your stage (pregnancy or postpartum) and what you need.",
   },
   {
-    icon: Calendar,
-    title: "Adaptive Guidance Engine",
-    description: "Receive trimester-aware weekly blueprints with yoga, breathwork, and meditation routines that evolve automatically based on your feedback and stage.",
+    icon: Heart,
+    title: "Support that follows your journey",
+    description: "As you continue, we remember your context — so support feels more personal.",
   },
   {
-    icon: CreditCard,
-    title: "One-Tap Booking & Tiered Service",
-    description: "Find vetted prenatal coaches and schedule sessions with a single tap. Start free, or unlock unlimited features for just €12/month.",
+    icon: BookOpen,
+    title: "Learn and explore",
+    description: "Visit the Care Library for trusted reading, tools, and practices.",
+  },
+  {
+    icon: Users,
+    title: "Connect with coaches (optional)",
+    description: "If you want human support, you can explore coach options.",
   },
 ];
 
@@ -38,16 +38,16 @@ const HowItWorks = () => (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24">
       <div className="container px-4 md:px-8 max-w-3xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-14">
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">How It Works</h1>
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">How it works</h1>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            From first visit to daily support — here's how Mooie Geest guides your perinatal wellness journey.
+            Mooie Geest is a gentle support space. You can start with one message — and build a more personal experience over time.
           </p>
         </motion.div>
 
         <div className="space-y-8">
-          {steps.map((step, i) => (
+          {sections.map((section, i) => (
             <motion.div
-              key={step.title}
+              key={section.title}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -55,17 +55,23 @@ const HowItWorks = () => (
               className="flex gap-5 items-start"
             >
               <div className="w-12 h-12 rounded-xl gradient-accent text-primary-foreground flex items-center justify-center shrink-0">
-                <step.icon className="h-5 w-5" />
+                <section.icon className="h-5 w-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Step {i + 1}</span>
-                  <h3 className="font-display text-lg font-semibold text-foreground">{step.title}</h3>
+                  <h3 className="font-display text-lg font-semibold text-foreground">{section.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{section.description}</p>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-12 p-5 rounded-xl bg-muted border border-border">
+          <p className="text-xs text-muted-foreground leading-relaxed text-center">
+            Mooie Geest is not medical advice. For urgent concerns, contact your healthcare provider.
+          </p>
         </div>
       </div>
     </section>

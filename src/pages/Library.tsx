@@ -140,8 +140,7 @@ const Library = () => {
             Care Library
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            A gentle space for trusted knowledge, practical guidance, and
-            supportive learning through pregnancy and motherhood.
+            Trusted reading and gentle learning for pregnancy and postpartum — curated to support calmer days.
           </p>
         </div>
       </section>

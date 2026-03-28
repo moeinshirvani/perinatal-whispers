@@ -18,7 +18,7 @@ const Footer = () => (
             <p>The Netherlands, 2353TK</p>
             <p>VAT: NL005202551B81</p>
             <p>
-              <a href="mailto:hello@mooiegeest.com" className="hover:text-accent transition-colors">hello@mooiegeest.com</a>
+              <a href="mailto:m.habibi6869@gmail.com" className="hover:text-accent transition-colors">m.habibi6869@gmail.com</a>
             </p>
           </div>
         </div>

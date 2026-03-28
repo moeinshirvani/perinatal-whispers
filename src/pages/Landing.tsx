@@ -1,51 +1,50 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { MessageCircle, Heart, Users, Sparkles, Shield, BookOpen, Smartphone, Brain, BarChart3, Calendar, ArrowRight } from "lucide-react";
+import { MessageCircle, Heart, Users, Sparkles, Shield, BookOpen, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import heroImage from "@/assets/hero-image.jpg";
 
 const features = [
-{
-  icon: Brain,
-  title: "Adaptive Guidance Engine",
-  description: "Trimester-aware routines that evolve with your feedback and pregnancy stage."
-},
-{
-  icon: MessageCircle,
-  title: "AI-Powered Onboarding",
-  description: "A friendly 10-question chat builds your personal Wellness Profile in under 2 minutes."
-},
-{
-  icon: BarChart3,
-  title: "Mood & Sleep Analytics",
-  description: "Track daily mood, sleep, and stress with clear real-time trend visualization."
-},
-{
-  icon: Sparkles,
-  title: "Yoga & Meditation Library",
-  description: "Curated prenatal and postnatal yoga, breathwork, and meditation routines."
-},
-{
-  icon: Heart,
-  title: "Dashboard Tracking",
-  description: "See your wellness journey at a glance with personalized insights and goals."
-},
-{
-  icon: Calendar,
-  title: "One-Tap Coach Booking",
-  description: "Find vetted prenatal coaches and schedule sessions with a single tap."
-}];
-
+  {
+    icon: MessageCircle,
+    title: "A safe space to talk",
+    description: "Share what's on your mind — without judgment, whenever you need it."
+  },
+  {
+    icon: Heart,
+    title: "Support for anxiety, overwhelm, and mood swings",
+    description: "Gentle guidance for the emotional ups and downs of pregnancy and postpartum."
+  },
+  {
+    icon: Sparkles,
+    title: "Help with sleep and rest",
+    description: "Practical support for restless nights and finding calm before bed."
+  },
+  {
+    icon: Shield,
+    title: "Gentle routines for calmer days",
+    description: "Breathing, grounding, and mindfulness practices that fit into your day."
+  },
+  {
+    icon: BookOpen,
+    title: "Trusted resources in one place",
+    description: "A curated library of reading and learning for pregnancy and motherhood."
+  },
+  {
+    icon: Users,
+    title: "Optional coach support",
+    description: "Connect with verified wellness professionals when you're ready for extra support."
+  },
+];
 
 const steps = [
-{ step: "1", title: "Instant PWA Access", description: "Add to Home Screen — no downloads needed." },
-{ step: "2", title: "AI Onboarding", description: "10-question friendly chat generates your Wellness Profile." },
-{ step: "3", title: "Daily Dashboard", description: "Mood & sleep tracking with clear real-time trends." },
-{ step: "4", title: "Weekly Blueprints", description: "Trimester-aware yoga, breathwork & meditation routines." },
-{ step: "5", title: "Book & Upgrade", description: "Seamless booking + tiered service: free or €12/mo premium." }];
-
+  { step: "1", title: "Start where you are", description: "Share what you're feeling or what you need today." },
+  { step: "2", title: "A few gentle questions", description: "So support can match your stage and situation." },
+  { step: "3", title: "Personal support over time", description: "We remember what matters, so you don't repeat yourself." },
+  { step: "4", title: "Small practices, real relief", description: "Breathing, grounding, sleep support, and emotional wellbeing." },
+  { step: "5", title: "Extra support when you want it", description: "Explore coaches and resources as you're ready." },
+];
 
 const Landing = () => {
   return (
@@ -65,24 +64,23 @@ const Landing = () => {
               <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
                 Your perinatal wellness companion
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-3">
-                Mooie Geest
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-6">
+                You don't have to go through this alone.
               </h1>
-              <p className="text-xl md:text-2xl font-display italic text-primary mb-6">
-                Mindful Pregnancy, Beautiful Motherhood
-              </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
-                AI-powered emotional support for your pregnancy and postpartum journey.
-                Chat daily, discover coaches, and nurture your wellbeing — all in one calm space.
+                Gentle support for pregnancy and the first months after birth — whenever you need it.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="hero" size="lg" asChild>
-                  <Link to="/chat">Start Free</Link>
+                  <Link to="/chat">Start a conversation</Link>
                 </Button>
                 <Button variant="hero-outline" size="lg" asChild>
-                  <Link to="/how-it-works">How it Works</Link>
+                  <Link to="https://library.mooiegeest.com/">Explore the Care Library</Link>
                 </Button>
               </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Start with one message. No perfect words needed.
+              </p>
             </motion.div>
 
             <motion.div
@@ -93,18 +91,32 @@ const Landing = () => {
 
               <div className="rounded-2xl overflow-hidden shadow-elevated">
                 <img
-
                   alt="Peaceful pregnant woman in a serene garden"
                   className="w-full h-auto object-cover"
                   loading="lazy" src="/lovable-uploads/0c6c73a4-72ba-4351-8485-a9de4fb35d42.png" />
-
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* What Makes Us Different */}
+      {/* Trust Strip */}
+      <section className="py-8 bg-card border-y border-border/50">
+        <div className="container px-4 md:px-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            {[
+              "Calm, judgment-free support",
+              "Personalized to your stage and needs",
+              "Built for everyday moments — not only appointments",
+              "Privacy and care-first design",
+            ].map((item) => (
+              <p key={item} className="text-sm text-muted-foreground font-medium">{item}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What You'll Find Here */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container px-4 md:px-8">
           <motion.div
@@ -114,12 +126,8 @@ const Landing = () => {
             className="text-center mb-12">
 
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              What Makes Us Different
+              What you'll find here
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              The only platform combining Adaptive Guidance Engine, AI onboarding, mood analytics,
-              trimester-aware routines, yoga & meditation library, dashboard tracking, and one-tap booking.
-            </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -147,7 +155,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* How It Works Teaser */}
+      {/* How Mooie Geest supports you */}
       <section className="py-16 md:py-24">
         <div className="container px-4 md:px-8">
           <motion.div
@@ -157,8 +165,11 @@ const Landing = () => {
             className="text-center mb-12">
 
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              How It Works
+              How Mooie Geest supports you
             </h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              Simple steps, gentle guidance — at your pace.
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-5 gap-6 max-w-5xl mx-auto">
@@ -190,7 +201,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Impact / Value */}
+      {/* Built with mothers in mind */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container px-4 md:px-8">
           <motion.div
@@ -200,26 +211,11 @@ const Landing = () => {
             className="max-w-3xl mx-auto text-center">
 
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
-              Exceptional Value
+              Built with mothers in mind
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Traditional prenatal wellness sessions cost €80–€120 per session. Mooie Geest provides
-              on-demand, tailored support for just <span className="font-semibold text-primary">€12/month</span> —
-              saving you time, money, and stress.
+              We're working with perinatal wellness experts and coaches to keep support safe, practical, and compassionate.
             </p>
-            <div className="grid sm:grid-cols-3 gap-6">
-              {[
-              { label: "On-Demand Support", value: "24/7", desc: "AI companion available anytime" },
-              { label: "Premium Plan", value: "€12/mo", desc: "vs. €80–€120 per session" },
-              { label: "Personalized", value: "100%", desc: "Tailored to your stage & needs" }].
-              map((stat) =>
-              <div key={stat.label} className="p-5 rounded-xl bg-background shadow-soft">
-                  <p className="text-3xl font-display font-bold text-primary mb-1">{stat.value}</p>
-                  <p className="text-sm font-semibold text-foreground mb-1">{stat.label}</p>
-                  <p className="text-xs text-muted-foreground">{stat.desc}</p>
-                </div>
-              )}
-            </div>
           </motion.div>
         </div>
       </section>
@@ -234,21 +230,29 @@ const Landing = () => {
             className="max-w-xl mx-auto text-center">
 
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Ready to Begin?
+              Ready to begin?
             </h2>
             <p className="text-muted-foreground mb-8">
-              Join mothers finding calm, clarity, and community.
+              You might find it helpful to start with just one message.
             </p>
             <Button variant="hero" size="lg" asChild>
-              <Link to="/chat">Start Your Free Journey</Link>
+              <Link to="/chat">Start a conversation</Link>
             </Button>
           </motion.div>
         </div>
       </section>
 
+      {/* Disclaimer */}
+      <section className="pb-8">
+        <div className="container px-4 md:px-8 max-w-2xl mx-auto text-center">
+          <p className="text-xs text-muted-foreground">
+            Mooie Geest is not medical advice. If you feel at risk or in urgent distress, contact your healthcare provider or local emergency services.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>);
-
 };
 
 export default Landing;
