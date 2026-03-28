@@ -7,6 +7,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Landing from "./pages/Landing";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
+import AuthCallback from "./pages/AuthCallback";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
 import CoachOnboarding from "./pages/CoachOnboarding";
@@ -37,6 +38,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/coaches" element={<Coaches />} />
             <Route path="/coaches/:slug" element={<CoachProfile />} />
