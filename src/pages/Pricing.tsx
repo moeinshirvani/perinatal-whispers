@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Clock, CreditCard, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -113,6 +113,45 @@ const Pricing = () => (
           <Button variant="hero-outline" size="sm" asChild>
             <Link to="/b2b" className="inline-flex items-center gap-1">Learn more <ArrowRight className="h-3 w-3" /></Link>
           </Button>
+        </motion.div>
+
+        {/* Exceptional Value */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto mt-16"
+        >
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground text-center mb-4">
+            Exceptional Value
+          </h2>
+          <p className="text-sm text-muted-foreground text-center max-w-lg mx-auto mb-10">
+            Traditional prenatal wellness sessions often cost €80–€120 per session. Mooie Geest gives you calm, personalized support for €12/month — so you can feel supported between appointments, without extra stress.
+          </p>
+
+          <div className="grid grid-cols-3 gap-6 text-center">
+            {[
+              { icon: Clock, stat: "24/7", label: "On-Demand Support", desc: "Support whenever you need it" },
+              { icon: CreditCard, stat: "€12/mo", label: "Premium Plan", desc: "vs. €80–€120 per session" },
+              { icon: Sparkles, stat: "100%", label: "Personalized", desc: "Tailored to your stage & needs" },
+            ].map((item, i) => (
+              <motion.div
+                key={item.stat}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex flex-col items-center"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                  <item.icon className="h-5 w-5 text-primary" />
+                </div>
+                <p className="text-2xl md:text-3xl font-display font-bold text-foreground">{item.stat}</p>
+                <p className="text-sm font-semibold text-foreground mt-1">{item.label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="max-w-2xl mx-auto mt-8 text-center">
