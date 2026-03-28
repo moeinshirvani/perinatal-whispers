@@ -2,10 +2,8 @@ import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useState } from "react";
 import moeinPhoto from "@/assets/moein.png";
 import mahboobehPhoto from "@/assets/mahboobeh.png";
-import majidPhoto from "@/assets/majid.png";
 
 const founders = [
   {
@@ -13,7 +11,7 @@ const founders = [
     role: "CEO & Co-Founder",
     location: "Leiderdorp, The Netherlands",
     linkedin: "https://linkedin.com/in/moeinshirvani",
-    bio: "Experienced web developer building Mooie Geest to guide mothers to practices that truly work. Passionate about leveraging technology for maternal wellness.",
+    bio: "Experienced web developer building Mooie Geest to help mothers find practices that truly work. Passionate about using technology to make compassionate support more accessible.",
     image: moeinPhoto,
   },
   {
@@ -21,25 +19,12 @@ const founders = [
     role: "Chief Wellness Officer & Co-Founder",
     location: "Leiderdorp, The Netherlands",
     linkedin: "https://www.linkedin.com/in/mahboobeh-habibi-b64b93338/",
-    bio: "7+ years in yoga & holistic wellness. E-RYT 500, Reiki Master Teacher, Life Coach, and Meditation Instructor — bringing deep expertise in prenatal and postnatal care to every aspect of the platform.",
+    bio: "7+ years in yoga and holistic wellness. E-RYT 200, Reiki Master Teacher, Life Coach, and Meditation Instructor — bringing deep expertise in prenatal and postnatal care to every aspect of the platform.",
     image: mahboobehPhoto,
   },
 ];
 
-const team = [
-  {
-    name: "Majid Seyedmiri",
-    role: "Lead Developer",
-    location: "Istanbul, Türkiye",
-    linkedin: "https://linkedin.com/in/majidseyedmiri",
-    bio: "Full-stack developer bringing technical excellence to the Mooie Geest platform.",
-    image: majidPhoto,
-  },
-];
-
 const Team = () => {
-  const [activeTab, setActiveTab] = useState<"founders" | "team">("founders");
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -51,22 +36,14 @@ const Team = () => {
             <p className="text-muted-foreground max-w-md mx-auto">The people behind Mooie Geest.</p>
           </motion.div>
 
-          <div className="flex justify-center gap-2 mb-10">
-            {(["founders", "team"] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2 rounded-full text-sm font-medium capitalize transition-colors ${
-                  activeTab === tab ? "bg-primary text-primary-foreground" : "bg-secondary/20 text-secondary hover:bg-secondary/30"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+          <div className="text-center mb-10 p-5 rounded-xl bg-primary/5 border border-primary/10">
+            <p className="text-sm text-muted-foreground italic">
+              "Compassion first. Practical support. Respect for every mother's experience."
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
-            {(activeTab === "founders" ? founders : team).map((person, i) => (
+            {founders.map((person, i) => (
               <motion.div
                 key={person.name}
                 initial={{ opacity: 0, y: 15 }}

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Star, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -10,31 +10,30 @@ const plans = [
     name: "Free",
     price: "€0",
     period: "forever",
-    description: "Core AI features to get you started.",
+    description: "Start with the essentials — no commitment needed.",
     features: [
-      "AI intake questionnaire & basic recommendations",
-      "Limited chat messages per day",
-      "Browse coaches & content",
-      "Basic mood tracking",
-      "Community access",
+      "Personalized conversation support",
+      "A few gentle questions to match your stage",
+      "Browse the Care Library",
+      "Explore coaches and resources",
     ],
-    cta: "Start Free",
+    cta: "Start free",
     highlight: false,
   },
   {
     name: "Premium",
     price: "€12",
     period: "/month",
-    description: "Full support for your entire journey.",
+    description: "Deeper personalization and ongoing support.",
     features: [
-      "Unlimited AI chat & personalized plans",
-      "Advanced analytics & full trend insights",
-      "Exclusive expert content library",
-      "Priority coach matching & booking discounts",
-      "Full dashboard & weekly blueprints",
+      "Unlimited conversations",
+      "Personalized support that remembers you",
+      "Full access to the Care Library",
+      "Priority coach matching",
+      "Gentle routines and practices",
       "Priority support",
     ],
-    cta: "Upgrade to Premium",
+    cta: "Upgrade when you're ready",
     highlight: true,
   },
 ];
@@ -51,10 +50,10 @@ const Pricing = () => (
           className="text-center mb-12"
         >
           <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
-            Simple, Transparent Pricing
+            Simple, transparent pricing
           </h1>
           <p className="text-muted-foreground max-w-md mx-auto">
-            Start free. Upgrade when you're ready for deeper support.
+            Start free. Upgrade when you want more personalization and resources.
           </p>
         </motion.div>
 
@@ -109,39 +108,18 @@ const Pricing = () => (
         >
           <div>
             <p className="text-sm font-semibold text-foreground">For employers & partners</p>
-            <p className="text-xs text-muted-foreground">Custom B2B licensing and white-label solutions available.</p>
+            <p className="text-xs text-muted-foreground">Custom options available for organizations supporting maternal wellbeing.</p>
           </div>
           <Button variant="hero-outline" size="sm" asChild>
             <Link to="/b2b" className="inline-flex items-center gap-1">Learn more <ArrowRight className="h-3 w-3" /></Link>
           </Button>
         </motion.div>
 
-        {/* Future Monetization */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-card shadow-soft"
-        >
-          <h3 className="font-display text-lg font-bold text-foreground mb-4 text-center">Planned Revenue Streams</h3>
-          <div className="grid sm:grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Booking Commission</p>
-              <p className="text-xs text-muted-foreground">15% per session booked through Mooie Geest</p>
-              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Next phase</span>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Affiliate Revenue</p>
-              <p className="text-xs text-muted-foreground">~10% on curated partner content & products</p>
-              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Next phase</span>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-1">B2B Licensing</p>
-              <p className="text-xs text-muted-foreground">Enterprise & white-label contracts</p>
-              <span className="inline-block mt-1 text-[10px] bg-accent/20 text-accent-foreground px-2 py-0.5 rounded-full">Contact sales</span>
-            </div>
-          </div>
-        </motion.div>
+        <div className="max-w-2xl mx-auto mt-8 text-center">
+          <p className="text-xs text-muted-foreground">
+            Mooie Geest is not medical advice. For urgent concerns, contact your healthcare provider.
+          </p>
+        </div>
       </div>
     </section>
 
