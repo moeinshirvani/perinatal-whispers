@@ -35,6 +35,9 @@ const Chat = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const [anonymousId, setAnonymousId] = useState<string>("");
+  const [showGuestCta, setShowGuestCta] = useState<boolean>(() => {
+    return localStorage.getItem("mg_guest_cta_dismissed") !== "true";
+  });
 
   useEffect(() => {
     setAnonymousId(getOrCreateAnonymousId());
@@ -141,7 +144,7 @@ const Chat = () => {
             </div>
           </motion.div>
         )}
-        {!user && messages.length >= 3 && (
+        {!user && showGuestCta && messages.length >= 3 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
             <div className="bg-primary/5 border border-primary/10 rounded-xl px-5 py-4 max-w-[85%] md:max-w-[70%] text-center space-y-2">
               <p className="text-sm text-muted-foreground">Want me to remember your profile and support you over time?</p>
@@ -149,7 +152,7 @@ const Chat = () => {
                 <Button variant="hero" size="sm" asChild>
                   <Link to="/auth">Create free account</Link>
                 </Button>
-                <Button variant="ghost" size="sm" className="text-muted-foreground">Continue for now</Button>
+                <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => { setShowGuestCta(false); localStorage.setItem("mg_guest_cta_dismissed", "true"); }}>Continue for now</Button>
               </div>
             </div>
           </motion.div>
