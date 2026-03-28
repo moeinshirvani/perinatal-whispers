@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { MessageCircle, Heart, Users, Sparkles, Shield, BookOpen, ArrowRight } from "lucide-react";
+import { MessageCircle, Heart, Users, Sparkles, Shield, BookOpen, ArrowRight, Clock, CreditCard } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -201,7 +201,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Built with mothers in mind */}
+      {/* Exceptional Value */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container px-4 md:px-8">
           <motion.div
@@ -210,12 +210,36 @@ const Landing = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center">
 
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
-              Built with mothers in mind
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              Exceptional Value
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              We're working with perinatal wellness experts and coaches to keep support safe, practical, and compassionate.
+            <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-10">
+              Traditional prenatal wellness sessions often cost €80–€120 per session. Mooie Geest gives you calm, personalized support for €12/month — so you can feel supported between appointments, without extra stress.
             </p>
+
+            <div className="grid grid-cols-3 gap-6 text-center">
+              {[
+                { icon: Clock, stat: "24/7", label: "On-Demand Support", desc: "Support whenever you need it" },
+                { icon: CreditCard, stat: "€12/mo", label: "Premium Plan", desc: "vs. €80–€120 per session" },
+                { icon: Sparkles, stat: "100%", label: "Personalized", desc: "Tailored to your stage & needs" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.stat}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <item.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <p className="text-2xl md:text-3xl font-display font-bold text-foreground">{item.stat}</p>
+                  <p className="text-sm font-semibold text-foreground mt-1">{item.label}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
